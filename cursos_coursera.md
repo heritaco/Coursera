@@ -1,0 +1,18 @@
+| Curso                                                                                                                                               | Quién lo imparte                                   |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+| [IBM RAG and Agentic AI Professional Certificate](https://www.coursera.org/professional-certificates/ibm-rag-and-agentic-ai)                        | IBM                                                |
+| [Advanced Statistics for Data Science](https://www.coursera.org/specializations/advanced-statistics-data-science)                                   | Johns Hopkins                                      |
+| [Introduction to Quantum Information](https://www.coursera.org/learn/introduction-to-quantum-information)                                           | Korea Advanced Institute of Science and Technology |
+| [Financial Markets](https://www.coursera.org/learn/financial-markets-global)                                                                        | Yale                                               |
+| [Reinforcement Learning in Finance](https://www.coursera.org/learn/reinforcement-learning-in-finance)                                               | New York University                                |
+| [Overview of Advanced Methods of Reinforcement Learning in Finance](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance) | New York University                                |
+| [Advanced Machine Learning on Google Cloud](https://www.coursera.org/specializations/advanced-machine-learning-tensorflow-gcp)                      | Google Cloud                                       |
+| [Machine Learning and Reinforcement Learning in Finance](https://www.coursera.org/specializations/machine-learning-reinforcement-finance)           | NYU                                                |
+| [Bayesian Statistics](https://www.coursera.org/specializations/bayesian-statistics\)                                                                | UC Santa Cruz                                      |
+| [Coding for Everyone: C and C++](https://www.coursera.org/specializations/coding-for-everyone)                                                      | UC Santa Cruz                                      |
+| [Mathematics for Machine Learning](https://www.coursera.org/specializations/mathematics-machine-learning)                                           | Imperial College London                            |
+| [TensorFlow 2 for Deep Learning](https://www.coursera.org/specializations/tensorflow2-deeplearning)                                                 | Imperial College London                            |
+| [Google Advanced Data Analytics Professional Certificate](https://www.coursera.org/professional-certificates/google-advanced-data-analytics)        | Google                                             |
+| [Finance & Quantitative Modeling for Analysts](https://www.coursera.org/specializations/finance-quantitative-modeling-analysts)                     | University of Penssylvania                         |
+| [Fundamentals of Quantitative Modeling](https://www.coursera.org/learn/wharton-quantitative-modeling)                                               | University of Pennsylvania                         |
+| [Financial Engineering and Risk Management](https://www.coursera.org/specializations/financialengineering)                                          | Columbia University                                |
