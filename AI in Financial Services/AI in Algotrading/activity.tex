@@ -1,5 +1,5 @@
-\documentclass[12pt]{article}
-\usepackage{newtxtext,newtxmath}
+\documentclass[10pt, a4paper]{article}
+% \usepackage{newtxtext,newtxmath}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -7,11 +7,59 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{enumitem}
-\geometry{margin=1in}
+
+
+
+% --- Layout & links ---
+\usepackage[margin=1.5in]{geometry}
+\usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue}
+\usepackage{enumitem}
+
+% --- Use local EB Garamond font ---
+\usepackage{fontspec} % Para usar fuentes OpenType y TrueType
+\usepackage{libertinust1math}
+\setmainfont{EB Garamond}[
+    UprightFont = * Regular,
+    ItalicFont = * Italic,
+    BoldFont = * SemiBold,
+    BoldItalicFont = * SemiBold Italic,
+]
+
+% --- Justification ---
+\usepackage{ragged2e}
+\justifying
+
+% --- Line spacing ---
+\usepackage{setspace}
+\setstretch{1.25}
+
+% --- Paragraph spacing ---
+\setlength{\parskip}{0.2em}
+
+% --- Page layout ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% Elegant header: course title left, document title center, page number right
+\fancyhead[L]{\small\textsc{AI in Financial Services}}
+% \fancyhead[C]{\small\textbf{LumenCash: Embedded Finance}}
+\fancyhead[R]{\small\thepage}
+\vspace{1em}
+\renewcommand{\headrulewidth}{0.05pt}
+
+
+% --- Do not number the first page ---
+\thispagestyle{empty}
+
+
+% --- Itemize settings ---
+\setlist{nosep,leftmargin=*,labelsep=0.5em}
+
+% --- Title ---
 
 \begin{document}
-
+\vspace*{-5em}
 \begin{center}
    \LARGE{\textbf{Artificial Intelligence in Algorithmic Trading: 
 An Extended Guide for Financial Services}} 
@@ -34,7 +82,7 @@ A modern AI trading workflow involves:
 \tikzset{
   box/.style={
     draw, rectangle, rounded corners,
-    minimum width=10cm, minimum height=1.6cm,
+    minimum width=10cm, minimum height=1.5cm,
     align=center
   }
 }
@@ -43,12 +91,12 @@ A modern AI trading workflow involves:
 \node[box, fill=orange!10] (model) at (0,-4.0) {\small AI Modeling\\ \footnotesize ML, Deep Learning, Reinforcement Learning};
 \node[box, fill=red!10]    (exec) at (0,-6.0)  {\small Execution\\ \footnotesize Trading Decisions, APIs, Broker Integration};
 
-\draw[->, line width=1.2pt] (data) -- (prep);
-\draw[->, line width=1.2pt] (prep) -- (model);
-\draw[->, line width=1.2pt] (model) -- (exec);
+\draw[->, line width=0.5pt] (data) -- (prep);
+\draw[->, line width=0.5pt] (prep) -- (model);
+\draw[->, line width=0.5pt] (model) -- (exec);
 \end{tikzpicture}
 
-\vspace{0.6cm}
+\vspace{0.3cm}
 \textit{Figure 1: AI trading pipeline.}
 \end{center}
 
@@ -94,27 +142,27 @@ The policy $\pi(a|s)$ maximizes $\mathbb{E}[\sum_{t}\gamma^t R_t]$, with rewards
 \newpage
 \section*{Technical Architecture}
 Deploying AI in trading requires an end-to-end system:
-
+\vspace{0.3cm}
 \begin{center}
-\begin{tikzpicture}[>=stealth, thick]
+\begin{tikzpicture}[>=stealth, thick, scale=1, every node/.style={transform shape}]
 \tikzset{
   box/.style={
     draw, rectangle, rounded corners,
-    minimum width=6.8cm, minimum height=1.4cm,
+    minimum width=5cm, minimum height=1.1cm,
     align=center
   }
 }
-\node[box, fill=blue!10]  (lake) at (-5,  3.0) {\small Data Lake \\ \footnotesize (Market + Alt Data)};
-\node[box, fill=green!10] (etl)  at (-5, -1.5) {\small ETL / Feature Store};
-\node[box, fill=orange!10] (model) at (0, 0.7) {\small AI Models \\ \footnotesize (ML, RL)};
-\node[box, fill=red!10]    (exec)    at (5,  -1.5) {\small Execution Layer \\ \footnotesize (Brokers/Exchanges)};
-\node[box, fill=purple!10] (monitor) at (5,  3.0) {\small Monitoring \& Risk Control};
+\node[box, fill=blue!10]  (lake) at (-3,  2.0) {Data Lake \\ \scriptsize (Market + Alt Data)};
+\node[box, fill=green!10] (etl)  at (-3, -1.0) {ETL / Feature Store};
+\node[box, fill=orange!10] (model) at (0, 0.48) {AI Models \\ \scriptsize (ML, RL)};
+\node[box, fill=red!10]    (exec)    at (3,  -1.0) {Execution Layer \\ \scriptsize (Brokers/Exchanges)};
+\node[box, fill=purple!10] (monitor) at (3,  2.0) {Monitoring \& Risk Control};
 
-\draw[->, line width=1.2pt] (lake) -- (etl);
-\draw[->, line width=1.2pt] (etl)  -- (model);
-\draw[->, line width=1.2pt] (model) -- (exec);
-\draw[->, line width=1.2pt] (model) -- (monitor);
-\draw[->, line width=1.2pt] (exec) -- (monitor);
+\draw[->, line width=.5pt] (lake) -- (etl);
+\draw[->, line width=.5pt] (etl)  -- (model);
+\draw[->, line width=.5pt] (model) -- (exec);
+\draw[->, line width=.5pt] (model) -- (monitor);
+\draw[->, line width=.5pt] (exec) -- (monitor);
 \end{tikzpicture}
 
 \vspace{0.6cm}
@@ -149,6 +197,7 @@ Scalability across asset classes & High infrastructure and latency costs \\
   \item \textbf{Privacy and compliance}: respecting data rights, licenses, and personally identifiable information (PII).
 \end{itemize}
 
+\newpage
 \section*{Real-World Examples}
 \paragraph{Two Sigma: Alternative Data and Market Predictions.}
 This quantitative hedge fund integrates financial and alternative datasets (including weather and sentiment) with machine learning at scale. Models generate multi-asset predictive signals, exemplifying how AI converts heterogeneous data into operational alpha.
