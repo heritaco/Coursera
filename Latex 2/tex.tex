@@ -6,7 +6,13 @@
 
 % --- Fuentes (texto y matemáticas) ---
 \usepackage{fontspec}
-\setmainfont{EB Garamond}[Numbers=OldStyle] % prosa con oldstyle
+\setmainfont{EB Garamond}[
+    UprightFont = * Medium,
+    ItalicFont = * Italic,
+    BoldFont = * Bold,
+    % ExtraBoldFont = * ExtraBold,
+    BoldItalicFont = * Bold Italic,
+]
 \usepackage{libertinust1math}
 
 % --- Encabezado con nombre de la sección ---
@@ -87,6 +93,7 @@ However, it also introduces risks such as:
   \item Overfitting of models to historical data.
 \end{itemize}
 
+\newpage
 \section{Math sample}
 Let $S_t$ follow a geometric Brownian motion:
 \[
@@ -106,6 +113,8 @@ This is how the stats operator, like the expected value, variance, and other mat
   \mathbb{E}[X], \quad \mathbb{V}[X], \quad \mathbb{P}(X \in A)
   % integral and dif
   \int f(x)\,dx, \quad \frac{d}{dx}f(x)
+  % other operators
+  , \quad \nabla f(x), \quad \partial_x f(x)
 \]
 
 \section{Machine Learning in Finance}
@@ -118,6 +127,7 @@ Suppose we want to predict the price of a stock based on historical features. Th
 \]
 where $y$ is the predicted price, $x_i$ are features, $\beta_i$ are coefficients, and $\epsilon$ is the error term.
 
+\newpage
 \section{Sample Table}
 Table~\ref{tab:strategies} summarizes common algorithmic trading strategies.
 
