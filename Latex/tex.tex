@@ -1,0 +1,61 @@
+\documentclass[10pt,a4paper]{article} % Compila con lualatex o xelatex
+
+% --- Layout & links ---
+\usepackage[margin=1.5in]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+% --- Fuentes (texto y matemáticas) ---
+\usepackage{fontspec}
+\setmainfont{EB Garamond}[Numbers=OldStyle] % prosa con oldstyle
+\usepackage{libertinust1math}
+
+% --- Encabezado simple ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textsc{AI in Financial Services}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.05pt}
+
+% --- Espaciado ---
+\usepackage{setspace}
+\setstretch{1.2}
+\setlength{\parskip}{0.2em}
+
+\begin{document}
+\thispagestyle{empty}
+\vspace*{-5em}
+\begin{center}
+  \LARGE\textbf{Artificial Intelligence in Algorithmic Trading: An Extended Guide}
+\end{center}
+
+\section*{Overview}
+This document is a minimal example using EB Garamond for prose and libertinust1math for formulas.
+Links like \href{https://example.com}{this one} are active.
+
+\section*{Math sample}
+Let $S_t$ follow a geometric Brownian motion:
+\[
+  dS_t = \mu S_t\,dt + \sigma S_t\,dW_t,\qquad
+  \Rightarrow\;
+  S_T = S_0 \exp\!\Big((\mu-\tfrac{1}{2}\sigma^2)T+\sigma\sqrt{T}\,Z\Big).
+\]
+The Black--Scholes call price:
+\[
+  C = S_0 e^{-qT}\Phi(d_1)-K e^{-rT}\Phi(d_2),
+  \quad d_{1,2}=\frac{\ln(S_0/K)+(r-q\pm\tfrac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}.
+\]
+
+This is how the stats operator, like the expected value, variance, and other math functions, look like with the selected font:
+
+\[
+  \mathbb{E}[X], \quad \mathbb{V}[X], \quad \mathbb{P}(X \in A)
+  % integral and dif
+  \int f(x)\,dx, \quad \frac{d}{dx}f(x)
+\]
+
+\section*{Text sample}
+EB Garamond provides a humanist texture suitable for long-form reading. 
+For tables or code listings, load only the packages que realmente uses.
+
+\end{document}
