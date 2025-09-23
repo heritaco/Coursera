@@ -1,0 +1,1 @@
+please do a summary on this transcript and improve it. add an abstract and a glossary at the beginning. also please improve what it is said. at the end add an example where all comes together 
