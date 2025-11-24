@@ -1,0 +1,40 @@
+Central banks exist to stabilize prices and prevent bank runs; the Fed, founded in 1913 after recurrent panics, executes these functions through the Board of Governors, 12 Reserve Banks, and the FOMC. 
+
+# Abstract
+
+The lecture traces why central banks arise, then details the Federal Reserve’s origin and governance. Paper-money overissue and bank runs motivate two core functions: price stability via control of money and **lender of last resort** via collateralized emergency lending. The Federal Reserve Act (1913) institutionalized these functions in a tripartite structure—**Board of Governors**, **12 Regional Reserve Banks**, and the **FOMC**—that sets policy targets and operates the payments and supervisory apparatus. 
+
+# Glossary
+
+* **Central bank:** Public authority that controls money and provides emergency liquidity to solvent banks. 
+* **Price stability:** Constraint against over-issuance of money that would cause inflation. 
+* **Bank run:** Coordinated withdrawals when depositors doubt convertibility; can fell solvent but illiquid banks. 
+* **Lender of last resort (LOLR):** Short-term central-bank loans against collateral to bridge liquidity shocks. 
+* **Board of Governors:** Seven-member Washington, D.C. agency guiding System policy. 
+* **Federal Reserve Banks:** Twelve regional banks that implement policy, supervise banks, and provide payment services. 
+* **FOMC:** Committee that sets interest-rate targets; members are the seven Governors, the New York Fed President, plus four rotating Reserve Bank presidents. 
+
+## Summary with enhancements
+
+* **Historical motivation.** The 1660s Swedish case shows paper notes work if credibly redeemable; over-issuance triggers runs. The remedy is public control of money and an LOLR backstop. 
+* **U.S. path.** After early central-bank experiments, the U.S. lacked a central bank from 1837 to 1913, culminating in the 1907 panic. The Federal Reserve Act restored monetary control and created an LOLR. 
+* **Operating logic.** Banks transform maturities and hold fewer cash reserves than demandable claims. Liquidity shocks are systemic, so a central bank must lend against sound collateral when markets seize. 
+* **Institutional design.** Governance balances central guidance with regional execution: the Board sets System policy, Reserve Banks supervise and lend, and the FOMC sets rate targets that anchor monetary policy. 
+* **Policy coherence (enhancement).** Think of the Fed as a **triad**:
+
+  1. **Mandate layer:** price stability + financial stability.
+  2. **Decision layer:** FOMC target setting.
+  3. **Implementation layer:** discount lending, supervision, and payment services at Reserve Banks.
+     This mapping aligns statutory goals to market operations that prevent runs and stabilize purchasing power. 
+
+## Worked example: everything together
+
+**Scenario.** A solvent regional bank faces sudden withdrawals after rumors about its loan book. Its securities are hard to sell quickly without a discount.
+
+**Actions.**
+
+1. The bank pledges eligible loans and securities to its District Reserve Bank. It receives an LOLR advance to meet withdrawals. Convertibility is restored; the run stalls. 
+2. Supervisors at the Reserve Bank examine the institution and monitor collateral quality. 
+3. The FOMC meets and maintains its policy target, signaling that system liquidity needs are met without altering the macro stance. The Board communicates the framework, preserving confidence. 
+
+**Outcome.** No forced fire sales. Payments clear. Depositors are paid. The bank survives an illiquidity shock, and price stability goals remain intact—illustrating how the Fed’s history-shaped structure operationalizes monetary control and crisis backstops. 

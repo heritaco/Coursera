@@ -1,0 +1,56 @@
+# Abstract
+
+Money market mutual funds (MMFs) are cash-management vehicles that invest in very short-term, high-quality debt. They channel large volumes of overnight and short-dated funding to banks and non-banks, typically yielding more than deposits but without deposit insurance. Prime funds carry modest credit risk; government and Treasury funds prioritize safety. Stress can trigger rapid redemptions, reduce short-term credit supply, and transmit shocks system-wide, as shown by the Reserve Primary Fund’s 2008 “break the buck.” 
+
+# Glossary
+
+* **Money market mutual fund (MMF):** Mutual fund that invests in ultra-short, high-quality instruments; aims to redeem at $1 plus interest. Shares are redeemable on demand. 
+* **Treasury / Government MMFs:** Invest only in Treasuries or government-backed securities and repo against them; safest but lowest yield. 
+* **Prime MMFs:** May hold commercial paper, bank CDs, and other private short-term debt; slightly higher yield with modest credit risk. 
+* **Breaking the buck:** NAV falls below $1; investors take losses on redemption. 
+* **Regulation Q:** Historical cap on bank deposit rates that made MMFs attractive at inception. 
+
+---
+
+## Summary with enhancements
+
+**Scale and role.** By 2021, MMFs managed **>$4T** and functioned as cornerstone lenders in U.S. short-term funding markets. They supply cash to a wide set of borrowers and help transmit liquidity quickly. 
+
+**Why investors use them.** MMFs typically pay **higher rates than bank deposits** and allow **on-demand redemption** at a target $1 NAV plus accrued interest, making them practical for households and corporates managing payroll and working capital. They are **not government-insured**, so a small loss is possible, especially in prime funds. 
+
+**Portfolio structure.** MMFs hold ultra-safe, short-dated assets. A large sleeve is in **U.S. Treasuries** and **Treasury-collateralized repos**; prime funds add **commercial paper** and **bank CDs** for incremental yield. Risk increases slightly as one moves from Treasury → government → prime. 
+
+**Business model mechanics.** Investors purchase fund shares; the fund invests in short-term paper and passes through interest. Target outcome: redeem **$1 + interest** the next day. The economic equivalence to deposits is high on convenience, but **credit backstop differs**: deposits are insured; MMFs are not. 
+
+**Run dynamics and systemic footprint.** Because MMFs finance core money markets, distress can pull liquidity abruptly. When investors fear losses, they redeem en masse, forcing funds to **stop lending** in money markets and pressuring borrowers to scramble for cash or sell assets, amplifying stress. 
+
+**Case study: Reserve Primary Fund (2008).** Heavy exposure to **Lehman Brothers** commercial paper led to losses after Lehman’s failure. The fund returned **$0.97 per $1** share, i.e., **broke the buck**. Investors then withdrew roughly **$400B** from prime funds, sharply reducing short-term credit availability. Post-crisis reforms aimed to curb repeat dynamics. 
+
+**Heuristic (enhancement).**
+
+* Safety–yield frontier:
+  [
+  \text{Treasury MMF} \rightarrow \text{Government MMF} \rightarrow \text{Prime MMF}
+  ]
+  with increasing expected yield and incremental credit/liquidity risk.
+* Simple NAV sensitivity:
+  [
+  \Delta \text{NAV} \approx \text{accrued income} - \text{credit\ loss}
+  ]
+  Over very short horizons, duration is minimal; idiosyncratic credit events dominate downside in prime funds. 
+
+---
+
+## Worked example: everything together
+
+**Context.** A corporation must hold $100M for payroll in 14 days. Choices: a **Treasury MMF** at an annualized **5.00%** or a **Prime MMF** at **5.20%**. Both redeem on demand at a $1 target, but only deposits are insured. 
+
+**Baseline math (no stress).**
+
+* Treasury MMF interest ≈ (100{,}000{,}000 \times 0.0500 \times \frac{14}{360} = $194{,}444).
+* Prime MMF interest ≈ (100{,}000{,}000 \times 0.0520 \times \frac{14}{360} = $202{,}222).
+  Incremental pickup ≈ **$7,778** for prime.
+
+**Stress scenario.** A credit event hits a prime holding; NAV prints **$0.997** before redemption. Proceeds = (100{,}000{,}000 \times 0.997 = $99{,}700{,}000). Net result vs Treasury MMF: the **$300,000 principal loss** dwarfs the **$7,778** incremental yield the firm sought. This mirrors the **break-the-buck** mechanism observed historically. 
+
+**Decision rule.** If **liquidity certainty and capital preservation** are paramount over marginal yield, a **Treasury/Government MMF** is rational. If a treasurer accepts small credit tail risk for slight pickup, **Prime MMF** fits—but must monitor counterparties and be prepared for sudden outflows. 

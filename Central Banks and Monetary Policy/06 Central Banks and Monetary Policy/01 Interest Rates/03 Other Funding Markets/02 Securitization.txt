@@ -1,0 +1,43 @@
+# Abstract
+
+Securitization converts illiquid, granular loans into tradable claims by pooling cash flows and slicing priority of payment. Diversification in a large pool makes aggregate defaults predictable, enabling issuance of senior bonds that are paid first and equity that absorbs residual risk. The model scaled U.S. credit supply since the 1970s and relies operationally on short-term “warehouse” funding (e.g., commercial paper) before bonds are sold; stress in funding markets impairs loan creation. 
+
+# Glossary
+
+* **Pool:** Many similar loans combined to diversify idiosyncratic default risk; aggregate loss becomes predictable for large (N). 
+* **Tranches:** Securities with ordered payment priority: senior bonds paid first; equity (first-loss) last. 
+* **Equity/first-loss piece:** Residual claimant; earns excess spread but bears unexpected losses. 
+* **Excess spread:** Loan yield minus bond coupon; accrues to equity if no losses. 
+* **Warehouse funding:** Short-term financing (often commercial paper to MMFs) used before pooling and sale; repaid with securitization proceeds. 
+* **GSE/MBS:** Agency-backed mortgage securities considered near-Treasury safe; dominate U.S. securitized volumes. 
+
+---
+
+## Summary with enhancements
+
+**Core mechanism.** Pool many similar mortgages; by the law of large numbers the default share clusters near its expectation, so cash flows are forecastable at the pool level. Use those forecasts to issue **senior bonds** with first claim on interest and principal and a **junior/equity** piece with residual claim. Result: safe bonds plus a risky, higher-return equity sleeve. 
+
+**Why it’s profitable.** Senior bond investors accept a lower coupon because of priority. The issuer retains or sells the equity slice that earns the **excess spread** when losses are modest; the equity is the buffer against tail losses. 
+
+**Scale and composition.** U.S. securitization rose sharply after the 1980s. By 2021 about **$12T** of securitization-related bonds were outstanding, the majority agency/GSE-backed and mortgage-centric (residential, multifamily, commercial), with a smaller private-label segment. 
+
+**Funding chain dependency.** Originate loans → finance them temporarily with **short-term paper sold to MMFs** → once the pool is large enough, issue bonds → use proceeds to repay the paper. When short-term funding freezes, origination and pooling falter, reducing credit supply economy-wide (as in 2008). 
+
+**Enhancements (mechanics and risk):**
+
+* **Variance scaling:** If defaults are weakly correlated, (\mathrm{Var}(\text{loss rate})\propto 1/N). Correlation spikes can defeat diversification.
+* **Design levers:** Subordination depth (size of equity), target bond coupon, collateral mix, and servicing quality govern tranche safety.
+* **Macro channel:** By transforming illiquid loans into liquid bonds, securitization raises the elasticity of credit supply; funding stress reverses it.
+
+---
+
+## Worked example: all together
+
+**Collateral and statistics.** Pool size (= $100) of mortgages yielding (5%). Expected default rate (p=2%) (loss timing abstracted). Issue **$80** of senior bonds at **4%**, retain **$20** equity. Waterfall: bond coupons first, equity residual. 
+
+1. **No defaults.** Pool cash (= $100\times 5%= $5.00). Pay bonds (=0.04\times 80=$3.20). **Equity gets $1.80** excess spread. 
+2. **Expected defaults (2%).** Pool cash (\approx $4.90). Bonds still paid in full (=$3.20). **Equity gets $1.70**. Senior bonds remain safe due to priority. 
+3. **Adverse shock.** If losses surge enough that interest from the pool < bond coupon, equity absorbs the shortfall first; only if equity is exhausted do bonds face impairment. This is the credit enhancement logic implicit in the waterfall. 
+4. **Funding chain integrated.** Before issuing the bonds, the originator finances newly underwritten loans by selling **commercial paper** to money market funds. After securitization closes, bond proceeds retire that paper. If CP markets seize, warehousing fails and loan supply contracts, demonstrating the model’s reliance on short-term funding. 
+
+**Decision lens.** Choose tranche sizes so expected pool cash comfortably covers bond coupons under stress; size equity to absorb plausible loss variance; secure reliable warehouse lines to avoid forced deleveraging when funding markets tighten. 

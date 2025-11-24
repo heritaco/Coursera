@@ -1,0 +1,52 @@
+# Abstract
+
+Module focus: why the Fed exists and what it does. Five functions anchor its legal mandate: **monetary policy**, **financial stability**, **regulation and supervision**, **payments**, and **consumer protection & community development**. Instruments center on short-term rate control, micro- and macro-prudential oversight, national payments rails, and statutory consumer rules. Together they target maximum employment, stable prices, and moderate long-term rates. 
+
+# Glossary
+
+* **Dual mandate:** Maximum employment, stable prices, and by statute “moderate long-term interest rates.” Policy choices must map to these ends. 
+* **Monetary policy:** Today, control of short-term interest rates to steer demand and inflation. 
+* **Financial stability:** A system that delivers credit and payments at reasonable cost **without interruption**; monitored with micro- and macro-prudential lenses. 
+* **Micro-prudential:** Institution-level risk oversight (bank exams, capital, liquidity). 
+* **Macro-prudential:** System-wide risk surveillance (leverage, unstable short-term funding, run risk). 
+* **Regulation vs supervision:** Rule-writing under statute (e.g., Truth in Lending) versus on-site compliance exams with remedies and penalties. 
+* **Payments:** Currency issuance, check clearing, ACH for small-value retail flows, and large-value wholesale transfers. 
+* **Consumer protection & community development:** Enforcement of fair-lending and disclosure rules; Community Reinvestment Act data and expectations for credit access in all served neighborhoods. 
+
+---
+
+## Summary with enhancements
+
+* **Mandate → instruments.** Congress tasks the Fed to promote an effective economy. The Fed operationalizes this via the funds-rate target, supervisory programs, payments operations, and consumer-law enforcement. Each function must be justified by its contribution to employment, price stability, and reasonable long-term rates. 
+* **Monetary policy today.** The modern regime centers on short-rate control. Higher policy rates restrain demand and inflation; lower rates support activity. Long-term yields adjust through expectations of future short rates. 
+* **Stability lens.** Micro: examiners assess safety and soundness of specific banks. Macro: the Fed monitors system leverage and reliance on runnable short-term funding that can disrupt credit supply. 
+* **Rules and exams.** Congress authorizes rules; the Fed drafts, consults, finalizes, then enforces. Truth in Lending standardizes disclosure; violations can trigger fines, dividend limits, or other remedies. 
+* **Payments plumbing.** The Fed issues cash; clears checks; runs ACH for payroll and bills; supports large-value interbank transfers. Reliability here is a core public good. 
+* **Households and communities.** Consumer-protection rules reduce hidden costs and improve choice; CRA reporting and expectations promote credit to low- and moderate-income areas served by each institution. 
+
+### Functional synthesis (concise model)
+
+[
+\text{Outcomes}=\underbrace{f(\text{short rates})}*{\text{monetary policy}}
++\underbrace{g(\text{micro},\text{macro})}*{\text{stability}}
++\underbrace{h(\text{rules}\to\text{exams})}*{\text{reg/sup}}
++\underbrace{p(\text{payments uptime})}*{\text{plumbing}}
++\underbrace{c(\text{consumer, CRA})}_{\text{distribution}}.
+]
+Each term lowers frictions or tail risk in its domain; the sum supports growth with stable prices. 
+
+---
+
+## Worked example: everything together
+
+**Scenario.** Inflation is above target; labor markets are tight. A rumor sparks withdrawals at a mid-size bank that also faces settlement peaks for corporate payrolls. A nearby community flags reduced small-business lending.
+
+**Actions.**
+
+1. **Monetary policy:** FOMC lifts the policy rate to cool demand and anchor inflation expectations. 
+2. **Financial stability:** Supervisors and macro-surveillance teams assess leverage and short-term funding across firms; they watch for run dynamics. 
+3. **Regulation & supervision:** Examiners conduct a targeted review; if governance lapses are found, they impose remedial actions or limits on distributions. 
+4. **Payments:** The Fed ensures ACH and wholesale rails clear on time so wages and settlements post despite stress, preventing knock-on liquidity failures. 
+5. **Consumer & community:** The Fed monitors Truth-in-Lending compliance during forbearance programs and uses CRA oversight to encourage continued small-business credit in the affected neighborhoods. 
+
+**Outcome.** Funding stress is contained, payments complete, disclosure remains fair, and credit access is maintained while policy tightens to restore price stability—illustrating the five functions operating as one system. 
