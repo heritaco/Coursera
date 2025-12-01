@@ -1,0 +1,413 @@
+% ======================================================================
+%   Document class
+%   Compile with: lualatex or xelatex
+% ======================================================================
+\documentclass[10pt,a4paper]{article}
+
+% Main document language (uncomment one of these):
+% \usepackage[spanish]{babel}
+% \usepackage[english]{babel}
+
+% --- Define reusable metadata macros ---
+\newcommand{\DocTitle}{Artificial Intelligence in Algorithmic Trading: An Extended Guide}
+\newcommand{\DocAuthor}{Heriberto Espino Montelongo}
+\newcommand{\DocKeywords}{artificial intelligence, algorithmic trading, quantitative finance, machine learning}
+% Connect to standard LaTeX title/author
+\title{\DocTitle}
+\author{\DocAuthor}
+
+
+% ======================================================================
+%   Page layout & hyperlinks
+% ======================================================================
+\usepackage[margin=4cm]{geometry} % Page margins
+\usepackage[hidelinks]{hyperref}  % Clickable links without colored boxes
+% --- Hyperref metadata using the same macros ---
+\hypersetup{
+  pdfauthor={\DocAuthor},
+  pdftitle={\DocTitle},
+  pdfkeywords={\DocKeywords}
+}
+
+% ======================================================================
+%   Mathematics and symbols
+% ======================================================================
+\usepackage{amsmath,amssymb}      % Standard AMS math packages
+
+% ======================================================================
+%   Lists (itemize, enumerate) and paragraph layout
+% ======================================================================
+\usepackage{enumitem}
+\setlist{nosep}                    % Remove extra vertical space in lists
+\setlist[itemize]{label=--}        % Itemize uses en dash as bullet
+
+% Global paragraph style: no indentation, add vertical space between paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% ======================================================================
+%   Fonts: text + math
+%   Requires LuaLaTeX or XeLaTeX
+% ======================================================================
+\usepackage{fontspec}              % Font selection for Unicode engines
+
+% Main text font: EB Garamond
+\setmainfont{EB Garamond}[
+  UprightFont   = * Regular,
+  ItalicFont    = * Italic,
+  BoldFont      = * SemiBold,
+  BoldItalicFont= * SemiBold Italic
+]
+
+% Math font: newtxmath (Times-like math)
+\usepackage{newtxmath}
+
+% Replace \mathbb with Libertinus Math blackboard bold
+%   bb=libus  -> use Libertinus blackboard-bold
+%   bbscaled  -> overall scaling factor
+\usepackage[bb=libus,bbscaled=1.0]{mathalpha}
+
+% ======================================================================
+%   Section and subsection formatting
+% ======================================================================
+\usepackage{titlesec}
+
+% Optional explicit bold faces for headings (not strictly necessary)
+\newfontface\garamondbold{EB Garamond SemiBold}
+\newfontface\garamondbolditalic{EB Garamond SemiBold Italic}
+
+% Section title format
+\titleformat{\section}
+  {\bfseries\Large\clearpage}     % Format for the title text
+  {\thesection}         % Section number
+  {1em}                 % Space between number and title
+  {}                    % Code before the title text
+
+% Subsection title format
+\titleformat{\subsection}
+  {\bfseries\large}
+  {\thesubsection}
+  {1em}
+  {}
+
+% ======================================================================
+%   Header and footer (fancyhdr)
+% ======================================================================
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhf{}                          % Clear all header and footer fields
+
+% Left header: current section name in small caps
+\fancyhead[L]{\small\textsc{\leftmark}}
+
+% Right header: page number
+\fancyhead[R]{\small\thepage}
+
+% Thin horizontal rule under the header
+\renewcommand{\headrulewidth}{0.5pt}
+
+% ======================================================================
+%   Line spacing
+% ======================================================================
+\usepackage{setspace}
+\onehalfspacing                     % 1.5 line spacing
+
+% ======================================================================
+%   Miscellaneous useful packages
+% ======================================================================
+\usepackage{tocloft}                % Customize table of contents
+\usepackage{xcolor}                 % Colors (for code, emphasis, etc.)
+\usepackage{booktabs}               % Professional-looking tables
+
+% ======================================================================
+%   Source code formatting
+% ======================================================================
+\usepackage{listings}
+
+% Basic listings configuration
+\lstset{
+  basicstyle      = \ttfamily\small,     % Monospaced, small size
+  backgroundcolor = \color{gray!10},     % Light gray background
+  frame           = single,              % Single-line frame around code
+  breaklines      = true,                % Wrap long lines
+  tabsize         = 2,                   % Optional: tab width
+  numbers         = none                 % Optional: omit line numbers
+}
+
+% ======================================================================
+%   Document body
+% ======================================================================
+% Full-width abstract (no extra margins)
+\usepackage{ragged2e} % for \justifying
+
+% Full-width, justified abstract environment
+\newenvironment{wideabstract}{%
+  \par\vspace{1em}%
+  \noindent\textbf{Abstract}\par
+  \vspace{0.2em}%
+  \justifying         % <-- full justification, overrides \centering
+}{%
+  \par\vspace{1em}%
+}
+
+
+% =============================
+% Cover-page "function"
+% =============================
+% Argument #1: abstract text
+\newcommand{\MakeCoverPage}[1]{%
+  \begin{titlepage}
+    \centering
+    \vspace*{4cm}
+    {\Huge\bfseries \DocTitle\par}
+    \vspace{2cm}
+    {\Large \DocAuthor\par}
+    \vspace{1cm}
+    {\large Universidad de las Américas Puebla\par}
+    \vfill
+
+    % --- Abstract ---
+    \begin{wideabstract}
+      #1%
+    \end{wideabstract}
+
+    \vspace{0.8cm}
+    % Printed keywords: same as pdfkeywords
+    {\bfseries Keywords:} \DocKeywords
+
+    \vspace{1cm}
+    {\large \today\par}
+  \end{titlepage}
+}
+
+
+
+\begin{document}
+
+% --- Portada ---
+
+\MakeCoverPage{%
+  This document provides a template for reports in the "AI in Financial Services"
+  course, using EB Garamond for prose and Libertinus Math for formulas. It includes
+  a cover page, abstract, table of contents, and sample sections for math and text.
+  Additional content demonstrates tables, code, and references.
+}
+
+
+
+
+% --- Tabla de contenidos ---
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+% --- Inicio del documento ---
+\section*{Record of Answers and Brief Explanations (Paradigms, Bets, Dutch Book)}
+
+\subsection*{Question 1}
+
+\textbf{Question.}  
+If you randomly guess on a 4-option multiple choice question, you have probability $0.25$ of being correct.  
+Which probabilistic paradigm does this argument best demonstrate?
+
+\textbf{Answer.}  
+\[
+\text{Classical}
+\]
+
+\textbf{Explanation.}  
+This uses the idea of \emph{equally likely outcomes} (4 options, 1 correct), so
+\[
+P(\text{correct}) = \frac{1}{4}.
+\]
+That is the classical (Laplace) definition.
+
+\bigskip
+
+\subsection*{Question 2}
+
+\textbf{Question.}  
+On a 3-option question, one option has a keyword the professor used often, so you assign it probability $> 1/3$ of being correct (based on your belief and extra information). Which paradigm?
+
+\textbf{Answer.}  
+\[
+\text{Bayesian}
+\]
+
+\textbf{Explanation.}  
+You are using \emph{subjective} beliefs updated by extra information (the keyword) rather than symmetry or long-run frequencies, which is Bayesian in spirit.
+
+\bigskip
+
+\subsection*{Question 3}
+
+\textbf{Question.}  
+Empirically, one in three students participates in extracurricular activities, so you conclude
+\[
+P(\text{random student participates}) = \frac{1}{3}.
+\]
+Which paradigm?
+
+\textbf{Answer.}  
+\[
+\text{Frequentist}
+\]
+
+\textbf{Explanation.}  
+This interprets probability as a \emph{long-run relative frequency} in a population or repeated sampling.
+
+\bigskip
+
+\subsection*{Question 4 — Chess bet, $p=1$}
+
+\textbf{Question.}  
+Bet: if \emph{she} wins, you pay her \$3; if \emph{you} win, she pays you \$5.  
+If she is 100\% confident she will win, what is her expected return?
+
+\textbf{Answer.}  
+\[
+3
+\]
+
+\textbf{Explanation.}  
+Let $p$ be her personal probability of winning. For her,
+\[
+\text{payoff} =
+\begin{cases}
++3, & \text{she wins},\\
+-5, & \text{she loses}.
+\end{cases}
+\]
+With $p=1$,
+\[
+\mathbb{E}[\text{payoff}]
+= 1\cdot 3 + 0\cdot(-5) = 3.
+\]
+
+\bigskip
+
+\subsection*{Question 5 — Chess bet, $p=0.5$}
+
+\textbf{Question.}  
+Same bet, but now her personal probability of winning is $p=0.5$. What is her expected return?
+
+\textbf{Answer.}  
+\[
+-1
+\]
+
+\textbf{Explanation.}  
+\[
+\mathbb{E}[\text{payoff}]
+= p\cdot 3 + (1-p)\cdot (-5)
+= 0.5\cdot 3 + 0.5\cdot (-5)
+= 1.5 - 2.5 = -1.
+\]
+
+\bigskip
+
+\subsection*{Question 6 — Fair bet $\Rightarrow$ her $p$}
+
+\textbf{Question.}  
+She will only accept the bet if it is \emph{fair} for her, i.e.\ expected return $=0$.  
+Find her personal probability $p$ of winning.
+
+\textbf{Answer.}  
+\[
+p = \frac{5}{8}.
+\]
+
+\textbf{Explanation.}  
+As before,
+\[
+\mathbb{E}[\text{payoff}]
+= 3p + (-5)(1-p)
+= 3p - 5 + 5p
+= 8p - 5.
+\]
+Set this equal to $0$ for a fair bet:
+\[
+8p - 5 = 0
+\quad\Longrightarrow\quad
+p = \frac{5}{8}.
+\]
+
+\bigskip
+
+\subsection*{Question 7 — Dutch book payoff}
+
+\textbf{Question.}  
+Two bets:
+
+\begin{itemize}
+  \item[(i)] If it rains or is overcast tomorrow, you pay him \$4; otherwise he pays you \$6.
+  \item[(ii)] If it is sunny tomorrow, you pay him \$5; otherwise he pays you \$5.
+\end{itemize}
+
+Events considered: rain, overcast, sunny (mutually exclusive and exhaustive).  
+If you take \emph{both} bets, how much do you win regardless of the outcome?
+
+\textbf{Answer.}  
+\[
+1
+\]
+
+\textbf{Explanation.}  
+Let us compute your net payoff in each case.
+
+\paragraph{Bet (i).}
+\[
+\text{rain/overcast: } -4, \quad
+\text{sunny: } +6.
+\]
+
+\paragraph{Bet (ii).}
+\[
+\text{sunny: } -5, \quad
+\text{not sunny (rain/overcast): } +5.
+\]
+
+Total payoff:
+
+\[
+\begin{aligned}
+\text{Rain/overcast:} &\quad -4 + 5 = +1,\\
+\text{Sunny:}         &\quad +6 - 5 = +1.
+\end{aligned}
+\]
+
+So you win \$1 no matter what happens.
+
+\bigskip
+
+\subsection*{Question 8 — Incoherent probabilities}
+
+\textbf{Question.}  
+For bet (i) to be fair, his probability that it rains or is overcast must be $0.6$.  
+For bet (ii) to be fair, his probability that it is sunny must be $0.5$.  
+
+These events are exhaustive and disjoint, but his “probabilities” do not sum to $1$.  
+What do they sum to?
+
+\textbf{Answer.}  
+\[
+0.6 + 0.5 = 1.1.
+\]
+
+\textbf{Explanation.}  
+Let $A =$ “rain or overcast” and $B =$ “sunny.”  
+He is using
+\[
+P(A) = 0.6,\quad P(B) = 0.5,
+\]
+with $A$ and $B$ disjoint and exhaustive. Coherent probabilities should satisfy
+\[
+P(A) + P(B) = 1,
+\]
+but instead
+\[
+P(A) + P(B) = 0.6 + 0.5 = 1.1 > 1,
+\]
+which is impossible, and this incoherence enables the Dutch book.
+
+\end{document}

@@ -1,0 +1,207 @@
+.
+Question 1
+For Questions 1-4, refer to the following table regarding passengers of the famous Titanic, which tragically sank on its maiden voyage in 1912. The table organizes passenger/crew counts according to the class of their ticket and whether they survived.
+
+
+If we randomly select a person's name from the complete list of passengers and crew, what is the probability that this person travelled in 1st class? Round your answer to two decimal places.
+
+section
+Enter answer here
+​
+1 point
+2.
+Question 2
+Titanic:
+
+What is the probability that a (randomly selected) person survived? Round your answer to two decimal places.
+
+section
+Enter answer here
+​
+1 point
+3.
+Question 3
+Titanic:
+
+What is the probability that a (randomly selected) person survived, given that they were in 1st class? Round your answer to two decimal places.
+
+section
+Enter answer here
+​
+1 point
+4.
+Question 4
+Titanic:
+
+True/False: The events concerning class and survival are statistically independent.
+
+section
+
+True
+
+
+
+False
+
+
+1 point
+5.
+Question 5
+For Questions 5-9, consider the following scenario:
+
+You have three bags, labeled A, B, and C. Bag A contains two red marbles and three blue marbles. Bag B contains five red marbles and one blue marble. Bag C contains three red marbles only.
+
+If you select from bag B, what is the probability that you will draw a red marble? Express the exact answer as a simplified fraction.
+
+section
+Preview will appear here...
+
+Enter math expression here
+​
+1 point
+6.
+Question 6
+Marbles:
+
+If you randomly select one of the three bags with equal probability (so that 
+P
+(
+A
+)
+=
+P
+(
+B
+)
+=
+P
+(
+C
+)
+=
+1
+/
+3
+P(A)=P(B)=P(C)=1/3P, left parenthesis, A, right parenthesis, equals, P, left parenthesis, B, right parenthesis, equals, P, left parenthesis, C, right parenthesis, equals, 1, slash, 3) and then randomly draw a marble from that bag, what is the probability that the marble will be blue? Round your answer to two decimal places.
+
+Hint: This is the marginal probability 
+P
+(
+blue
+)
+P(blue)P, left parenthesis, start text, b, l, u, e, end text, right parenthesis. You can obtain this using the law of total probability (which appears in the denominator in Bayes' theorem). It is 
+P
+(
+blue
+)
+=
+P
+(
+blue
+∩
+A
+)
++
+P
+(
+blue
+∩
+B
+)
++
+P
+(
+blue
+∩
+C
+)
+=
+P
+(
+blue
+∣
+A
+)
+⋅
+P
+(
+A
+)
++
+P
+(
+blue
+∣
+B
+)
+⋅
+P
+(
+B
+)
++
+P
+(
+blue
+∣
+C
+)
+⋅
+P
+(
+C
+)
+P(blue)=P(blue∩A)+P(blue∩B)+P(blue∩C)
+=P(blue∣A)⋅P(A)+P(blue∣B)⋅P(B)+P(blue∣C)⋅P(C)P(\text{blue}) = P(\text{blue} \cap A) + P(\text{blue} \cap B) + P(\text{blue} \cap C) \\ = P(\text{blue} \mid A)\cdot P(A) + P(\text{blue} \mid B)\cdot P(B) + P(\text{blue} \mid C) \cdot P(C)
+
+section
+Enter answer here
+​
+1 point
+7.
+Question 7
+Marbles:
+
+Suppose a bag is randomly selected (again, with equal probability), but you do not know which it is. You randomly draw a marble and observe that it is blue. What is the probability that the bag you selected this marble from is A? That is, find 
+P
+(
+A
+∣
+blue
+)
+P(A∣blue)P, left parenthesis, A, \mid, start text, b, l, u, e, end text, right parenthesis. Round your answer to two decimal places.
+
+
+section
+Enter answer here
+​
+1 point
+8.
+Question 8
+Marbles:
+
+Suppose a bag is randomly selected (again, with equal probability), but you do not know which it is. You randomly draw a marble and observe that it is blue. What is the probability that the bag you selected from is C? That is, find 
+P
+(
+C
+∣
+blue
+)
+P(C∣blue)P, left parenthesis, C, \mid, start text, b, l, u, e, end text, right parenthesis. Round your answer to two decimal places.
+
+section
+Enter answer here
+​
+1 point
+9.
+Question 9
+Marbles:
+
+Suppose a bag is randomly selected (again, with equal probability), but you do not know which it is. You randomly draw a marble and observe that it is red. What is the probability that the bag you selected from is C? That is, find 
+P
+(
+C
+∣
+red
+)
+P(C∣red)P, left parenthesis, C, \mid, start text, r, e, d, end text, right parenthesis. Round your answer to two decimal places.

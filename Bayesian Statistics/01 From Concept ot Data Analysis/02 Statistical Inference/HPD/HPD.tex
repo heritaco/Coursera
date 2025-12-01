@@ -1,0 +1,404 @@
+\documentclass[10pt,a4paper]{article}
+% \usepackage[spanish]{babel}
+% \usepackage[english]{babel}
+
+% --- Layout & links ---
+\usepackage[margin=4cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+% --- Matemáticas ---
+\usepackage{amsmath,amssymb}      % Standard AMS math packages
+
+% --- Listas ---
+\usepackage{enumitem}
+\setlist{nosep}                    % Remove extra vertical space in lists
+\setlist[itemize]{label=--}        % Itemize uses en dash as bullet
+
+% Global paragraph style: no indentation, add vertical space between paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% --- Fuentes (texto y matemáticas) ---
+\usepackage{fontspec}              % Font selection for Unicode engines
+
+% Main text font: EB Garamond
+\setmainfont{EB Garamond}[
+  UprightFont   = * Regular,
+  ItalicFont    = * Italic,
+  BoldFont      = * SemiBold,
+  BoldItalicFont= * SemiBold Italic
+]
+
+% Math font: newtxmath (Times-like math)
+\usepackage{newtxmath}
+
+% Replace \mathbb with Libertinus Math blackboard bold
+%   bb=libus  -> use Libertinus blackboard-bold
+%   bbscaled  -> overall scaling factor
+\usepackage[bb=libus,bbscaled=1.0]{mathalpha}
+
+
+% --- Secciones y subsecciones ---
+\usepackage{titlesec}
+
+\newfontface\extrabold{EB Garamond ExtraBold}
+
+\titleformat{\section}
+  {\bfseries\Large}{\thesection}{0.5em}{}
+\titleformat{\subsection}
+  {\bfseries\large}{\thesubsection}{0.5em}{}
+
+
+% --- Encabezado simple ---
+\usepackage{fancyhdr}
+\pagestyle{empty}
+\fancyhf{}
+
+
+% --- Espaciado ---
+\usepackage{setspace}
+\setstretch{1.2}
+
+
+
+
+\begin{document}
+% \thispagestyle{empty}
+% \vspace*{-5em}
+% \begin{center}
+%   \LARGE\extrabold{Artificial Intelligence in Algorithmic Trading: An Extended Guide}
+% \end{center}
+\section*{HPD set for the posterior $\pi(\theta \mid y) = 2\theta$ on $(0,1)$}
+
+\subsection*{Posterior model}
+
+Consider a one-dimensional parameter $\Theta$ with posterior density
+\begin{equation}
+  \pi(\theta \mid y) =
+  \begin{cases}
+    2\theta, & 0 < \theta < 1,\\[4pt]
+    0,       & \text{otherwise}.
+  \end{cases}
+\end{equation}
+We first check that this is a proper density:
+\begin{equation}
+  \int_{0}^{1} 2\theta \, d\theta
+  = \left[ \theta^{2} \right]_{0}^{1}
+  = 1.
+\end{equation}
+
+We want the $(1-\alpha)$ highest posterior density (HPD) set $H_{1-\alpha}$ using the \emph{level set} definition:
+\begin{equation}
+  H_{1-\alpha}
+  = \left\{ \theta : \pi(\theta \mid y) \ge k_\alpha \right\},
+\end{equation}
+where the threshold $k_\alpha$ is chosen such that
+\begin{equation}
+  \int_{H_{1-\alpha}} \pi(\theta \mid y)\, d\theta
+  = 1 - \alpha.
+\end{equation}
+
+\subsection*{Level sets of the posterior}
+
+For a fixed level $k > 0$, the level set of $\pi(\theta \mid y)$ is
+\begin{equation}
+  L(k)
+  := \left\{ \theta \in (0,1) : \pi(\theta \mid y) \ge k \right\}
+   = \left\{ \theta \in (0,1) : 2\theta \ge k \right\}.
+\end{equation}
+Solving the inequality $2\theta \ge k$ gives
+\begin{equation}
+  \theta \ge \frac{k}{2}.
+\end{equation}
+Intersecting with the support $0 < \theta < 1$ yields, for $0 < k \le 2$,
+\begin{equation}
+  L(k) = \left[ \frac{k}{2},\, 1 \right].
+\end{equation}
+(For $k > 2$ the set is empty; for $k \le 0$ the set is $(0,1)$, but the interesting case is $0<k\le2$.)
+
+Thus, for $0 < k \le 2$,
+\begin{equation}
+  L(k) = \left[ \frac{k}{2}, 1 \right].
+\end{equation}
+
+\subsection*{Posterior probability of a level set}
+
+Define the posterior probability contained in the level set $L(k)$ by
+\begin{equation}
+  \varphi(k)
+  := P\bigl( \Theta \in L(k) \mid y \bigr)
+  = \int_{L(k)} \pi(\theta \mid y)\, d\theta.
+\end{equation}
+For $0 < k \le 2$, using $L(k) = [k/2, 1]$, we obtain
+\begin{align}
+  \varphi(k)
+  &= \int_{k/2}^{1} 2\theta \, d\theta \\
+  &= \left[ \theta^{2} \right]_{\theta = k/2}^{\theta = 1}
+   = 1 - \left( \frac{k}{2} \right)^{2}.
+\end{align}
+Thus
+\begin{equation}
+  \varphi(k) = 1 - \left( \frac{k}{2} \right)^{2},
+  \qquad 0 < k \le 2.
+\end{equation}
+
+\subsection*{Determining the HPD threshold $k_\alpha$}
+
+By definition, the $(1-\alpha)$ HPD set corresponds to the level $k_\alpha$ such that
+\begin{equation}
+  \varphi(k_\alpha) = 1 - \alpha.
+\end{equation}
+Using the explicit expression for $\varphi(k)$,
+\begin{equation}
+  1 - \left( \frac{k_\alpha}{2} \right)^{2}
+  = 1 - \alpha,
+\end{equation}
+which implies
+\begin{equation}
+  \left( \frac{k_\alpha}{2} \right)^{2} = \alpha
+  \quad \Longrightarrow \quad
+  k_\alpha = 2\sqrt{\alpha},
+\end{equation}
+where we take the positive root since $k_\alpha \ge 0$.
+
+\subsection*{HPD region}
+
+The HPD region $H_{1-\alpha}$ is the level set at height $k_\alpha$:
+\begin{equation}
+  H_{1-\alpha}
+  = L(k_\alpha)
+  = \left[ \frac{k_\alpha}{2},\, 1 \right]
+  = \left[ \frac{2\sqrt{\alpha}}{2},\, 1 \right]
+  = [\sqrt{\alpha},\, 1 ].
+\end{equation}
+
+Therefore, the $(1-\alpha)$ HPD credible set for this posterior is
+\begin{equation}
+  H_{1-\alpha}
+  = [\sqrt{\alpha},\, 1 ].
+\end{equation}
+
+\subsection*{Verification of the posterior mass}
+
+We can check directly that this set has posterior probability $1-\alpha$:
+\begin{align}
+  P(\Theta \in H_{1-\alpha} \mid y)
+  &= \int_{\sqrt{\alpha}}^{1} 2\theta \, d\theta \\
+  &= \left[ \theta^{2} \right]_{\theta = \sqrt{\alpha}}^{\theta = 1} \\
+  &= 1 - (\sqrt{\alpha})^{2}
+   = 1 - \alpha.
+\end{align}
+
+\subsection*{Comparison with the equal-tailed credible interval}
+
+The CDF associated with $\pi(\theta \mid y) = 2\theta$ on $(0,1)$ is
+\begin{equation}
+  F(\theta)
+  = P(\Theta \le \theta \mid y)
+  = \int_{0}^{\theta} 2t \, dt
+  = \theta^{2}.
+\end{equation}
+A $(1-\alpha)$ equal-tailed credible interval $(a,b)$ satisfies
+\begin{equation}
+  F(a) = \frac{\alpha}{2}, \qquad
+  F(b) = 1 - \frac{\alpha}{2}.
+\end{equation}
+Thus
+\begin{equation}
+  a^{2} = \frac{\alpha}{2}
+  \quad\Longrightarrow\quad
+  a = \sqrt{\frac{\alpha}{2}},
+\end{equation}
+and
+\begin{equation}
+  b^{2} = 1 - \frac{\alpha}{2}
+  \quad\Longrightarrow\quad
+  b = \sqrt{1 - \frac{\alpha}{2}}.
+\end{equation}
+Hence the equal-tailed $(1-\alpha)$ credible interval is
+\begin{equation}
+  (a,b)
+  = \left( \sqrt{\frac{\alpha}{2}},\ \sqrt{1 - \frac{\alpha}{2}} \right),
+\end{equation}
+which is clearly different from the HPD region
+\begin{equation}
+  H_{1-\alpha} = [\sqrt{\alpha},\, 1 ].
+\end{equation}
+
+\bigskip
+
+\noindent
+\[
+  \boxed{
+    H_{1-\alpha} \;=\; [\sqrt{\alpha},\, 1] \quad\text{for}\quad
+    \pi(\theta \mid y) = 2\theta,\; 0 < \theta < 1.
+  }
+\]
+\section*{Highest Posterior Density (HPD) Sets: General Definition}
+
+\subsection*{Setup}
+
+Let $(\Theta,\mathcal{B})$ be a parameter space (for instance $\Theta \subseteq \mathbb{R}^d$)
+with posterior density
+\begin{equation}
+  \pi(\theta \mid y), \qquad \theta \in \Theta,
+\end{equation}
+with respect to some reference measure $\mu$ (typically Lebesgue measure), so that
+\begin{equation}
+  \int_{\Theta} \pi(\theta \mid y)\, d\mu(\theta) = 1.
+\end{equation}
+
+We fix a credibility level $1-\alpha$ with $0<\alpha<1$ (e.g. $\alpha = 0.05$ for a
+$95\%$ credible level). A \emph{credible set} $C \subseteq \Theta$ of level $1-\alpha$
+satisfies
+\begin{equation}
+  P(\Theta \in C \mid y)
+  = \int_{C} \pi(\theta \mid y)\, d\mu(\theta)
+  = 1 - \alpha.
+\end{equation}
+
+Among all such sets, the \emph{highest posterior density (HPD) set} is the one that
+contains the $(1-\alpha)$ most probable parameter values, in the sense of posterior
+density.
+
+\subsection*{Level sets of the posterior density}
+
+For each \emph{density level} $k \ge 0$ we define the \emph{level set} of
+$\pi(\theta \mid y)$ at height $k$ by
+\begin{equation}
+  L(k)
+  := \left\{ \theta \in \Theta : \pi(\theta \mid y) \ge k \right\}.
+\end{equation}
+Intuitively, $L(k)$ is the subset of parameter values for which the posterior density
+is at least $k$. As $k$ decreases, the set $L(k)$ becomes larger.
+
+We then define the posterior \emph{probability content} of the level set $L(k)$ as
+\begin{equation}
+  \varphi(k)
+  := P(\Theta \in L(k) \mid y)
+  = \int_{L(k)} \pi(\theta \mid y)\, d\mu(\theta).
+\end{equation}
+Since lowering $k$ can only enlarge $L(k)$, the function $\varphi(k)$ is nonincreasing
+in $k$:
+\begin{equation}
+  k_1 > k_2
+  \quad \Longrightarrow \quad
+  L(k_1) \subseteq L(k_2)
+  \quad \Longrightarrow \quad
+  \varphi(k_1) \le \varphi(k_2).
+\end{equation}
+Moreover, as $k \to 0$ we recover the whole parameter space, so
+$\varphi(k) \to 1$, while as $k$ increases towards the maximum of $\pi(\theta\mid y)$
+we have $\varphi(k) \to 0$.
+
+\subsection*{Definition of the $(1-\alpha)$ HPD set}
+
+The $(1-\alpha)$ HPD set $H_{1-\alpha}$ is defined via a \emph{density threshold}
+$k_\alpha$ such that the level set at height $k_\alpha$ contains exactly $(1-\alpha)$
+posterior probability:
+\begin{equation}
+  \varphi(k_\alpha)
+  = \int_{L(k_\alpha)} \pi(\theta \mid y)\, d\mu(\theta)
+  = 1 - \alpha.
+\end{equation}
+Whenever $\varphi$ is continuous and strictly decreasing in $k$ over the relevant
+range, the value $k_\alpha$ is uniquely determined by this equation.
+
+The $(1-\alpha)$ HPD set is then
+\begin{equation}
+  H_{1-\alpha}
+  = L(k_\alpha)
+  = \left\{ \theta \in \Theta : \pi(\theta \mid y) \ge k_\alpha \right\}.
+\end{equation}
+
+By construction:
+\begin{enumerate}
+  \item $H_{1-\alpha}$ has posterior probability
+  \begin{equation}
+    P(\Theta \in H_{1-\alpha} \mid y)
+    = \int_{H_{1-\alpha}} \pi(\theta \mid y)\, d\mu(\theta)
+    = 1 - \alpha.
+  \end{equation}
+  \item For any $\theta_1 \in H_{1-\alpha}$ and $\theta_2 \notin H_{1-\alpha}$,
+  we have
+  \begin{equation}
+    \pi(\theta_1 \mid y) \ge k_\alpha > \pi(\theta_2 \mid y),
+  \end{equation}
+  i.e. every point inside $H_{1-\alpha}$ has posterior density at least as large
+  as any point outside.
+\end{enumerate}
+This expresses formally the idea that $H_{1-\alpha}$ is the set of ``most probable''
+parameter values with total probability $1-\alpha$.
+
+\subsection*{Univariate case and HPD intervals}
+
+In the one-dimensional case ($\Theta \subseteq \mathbb{R}$), $H_{1-\alpha}$ is called
+an \emph{HPD interval} when it is connected. If the posterior density $\pi(\theta \mid y)$
+is strictly unimodal and sufficiently regular, then for each $k$ the level set $L(k)$ is
+typically an interval
+\begin{equation}
+  L(k) = [a(k), b(k)],
+\end{equation}
+and the HPD set $H_{1-\alpha}$ is simply the shortest interval centered around the
+mode that has posterior probability $1-\alpha$.
+
+If the posterior density is \emph{multimodal}, the level set $L(k)$, and hence the
+HPD set $H_{1-\alpha}$, can be a union of disjoint intervals:
+\begin{equation}
+  H_{1-\alpha}
+  = \bigcup_{j=1}^{J} I_j, \qquad
+  I_j \subset \Theta,
+\end{equation}
+each $I_j$ containing one or more modes, with the property that the union has total
+probability $1-\alpha$ and consists only of points whose density is at least $k_\alpha$.
+
+\subsection*{Relation to equal-tailed credible intervals}
+
+Let $F(\theta \mid y)$ denote the posterior cumulative distribution function (CDF),
+\begin{equation}
+  F(\theta \mid y)
+  := P(\Theta \le \theta \mid y)
+  = \int_{(-\infty,\theta]} \pi(t \mid y)\, dt
+  \qquad \text{(univariate case)}.
+\end{equation}
+A $(1-\alpha)$ \emph{equal-tailed} credible interval $(a,b)$ is defined by the
+quantile conditions
+\begin{equation}
+  F(a \mid y) = \frac{\alpha}{2},
+  \qquad
+  F(b \mid y) = 1 - \frac{\alpha}{2}.
+\end{equation}
+Both $(a,b)$ and $H_{1-\alpha}$ satisfy
+\begin{equation}
+  P(a < \Theta < b \mid y) = 1 - \alpha,
+  \qquad
+  P(\Theta \in H_{1-\alpha} \mid y) = 1 - \alpha,
+\end{equation}
+but they need not coincide. They do coincide in many common symmetric and unimodal
+cases (e.g.\ Normal posteriors), but in general:
+\begin{itemize}
+  \item Equal-tailed intervals are determined by \emph{tail probabilities};
+  \item HPD sets are determined by \emph{contours of constant density}.
+\end{itemize}
+
+\subsection*{Summary}
+
+Given a posterior density $\pi(\theta \mid y)$ and level $1-\alpha$, the HPD set is
+defined as
+\begin{equation}
+  H_{1-\alpha}
+  =
+  \left\{
+    \theta \in \Theta :
+    \pi(\theta \mid y) \ge k_\alpha
+  \right\},
+\end{equation}
+where $k_\alpha$ is chosen such that
+\begin{equation}
+  \int_{\{\theta : \pi(\theta \mid y) \ge k_\alpha\}} \pi(\theta \mid y)\, d\mu(\theta)
+  = 1 - \alpha.
+\end{equation}
+This set has posterior probability $1-\alpha$ and contains only points of highest
+posterior density relative to the rest of the parameter space.
+
+\end{document}

@@ -1,0 +1,1240 @@
+% ======================================================================
+%   Document class
+%   Compile with: lualatex or xelatex
+% ======================================================================
+\documentclass[10pt,a4paper]{article}
+
+% Main document language (uncomment one of these):
+% \usepackage[spanish]{babel}
+% \usepackage[english]{babel}
+
+% ======================================================================
+%   Page layout & hyperlinks
+% ======================================================================
+\usepackage[margin=4cm]{geometry} % Page margins
+\usepackage[hidelinks]{hyperref}  % Clickable links without colored boxes
+% Allow paragraphs a bit of "emergency" stretch to avoid overfull boxes
+\setlength{\emergencystretch}{3em}
+\tolerance=2000              % Relax badness a bit (default 200)
+\usepackage{microtype}   % Subtle character protrusion and better line breaks
+
+
+
+% ======================================================================
+%   Mathematics and symbols
+% ======================================================================
+\usepackage{amsmath,amssymb}      % Standard AMS math packages
+
+% ======================================================================
+%   Lists (itemize, enumerate) and paragraph layout
+% ======================================================================
+\usepackage{enumitem}
+\setlist{nosep}                    % Remove extra vertical space in lists
+\setlist[itemize]{label=--}        % Itemize uses en dash as bullet
+
+% Global paragraph style: no indentation, add vertical space between paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% ======================================================================
+%   Fonts: text + math
+%   Requires LuaLaTeX or XeLaTeX
+% ======================================================================
+\usepackage{fontspec}              % Font selection for Unicode engines
+
+% Main text font: EB Garamond
+\setmainfont{EB Garamond}[
+  UprightFont   = * Regular,
+  ItalicFont    = * Italic,
+  BoldFont      = * SemiBold,
+  BoldItalicFont= * SemiBold Italic
+]
+
+% Math font: newtxmath (Times-like math)
+\usepackage{newtxmath}
+
+% Replace \mathbb with Libertinus Math blackboard bold
+%   bb=libus  -> use Libertinus blackboard-bold
+%   bbscaled  -> overall scaling factor
+\usepackage[bb=libus,bbscaled=1.0]{mathalpha}
+
+% ======================================================================
+%   Section and subsection formatting
+% ======================================================================
+\usepackage{titlesec}
+
+\usepackage{etoolbox}
+\pretocmd{\section}{\clearpage}{}{}
+
+% Optional explicit bold faces for headings (not strictly necessary)
+\newfontface\garamondbold{EB Garamond SemiBold}
+\newfontface\garamondbolditalic{EB Garamond SemiBold Italic}
+
+% everytime we use a section, it starts in a new page
+% Section title format
+\titleformat{\section}
+  {\bfseries\Large\clearpage}     % Format for the title text
+  {\thesection}         % Section number
+  {1em}                 % Space between number and title
+  {}                    % Code before the title text
+
+% Subsection title format
+\titleformat{\subsection}
+  {\bfseries\large}
+  {\thesubsection}
+  {1em}
+  {}
+
+% ======================================================================
+%   Header and footer (fancyhdr)
+% ======================================================================
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhf{}                          % Clear all header and footer fields
+
+% Left header: current section name in small caps
+\fancyhead[L]{\small\textsc{\leftmark}}
+
+% Right header: page number
+\fancyhead[R]{\small\thepage}
+
+% Thin horizontal rule under the header
+\renewcommand{\headrulewidth}{0.5pt}
+
+% ======================================================================
+%   Line spacing
+% ======================================================================
+\usepackage{setspace}
+\onehalfspacing                     % 1.5 line spacing
+
+% ======================================================================
+%   Miscellaneous useful packages
+% ======================================================================
+\usepackage{tocloft}                % Customize table of contents
+\usepackage{xcolor}                 % Colors (for code, emphasis, etc.)
+\usepackage{booktabs}               % Professional-looking tables
+
+% ======================================================================
+%   Source code formatting
+% ======================================================================
+\usepackage{listings}
+
+% Basic listings configuration
+\lstset{
+  basicstyle      = \ttfamily\small,     % Monospaced, small size
+  backgroundcolor = \color{gray!10},     % Light gray background
+  frame           = single,              % Single-line frame around code
+  breaklines      = true,                % Wrap long lines
+  tabsize         = 2,                   % Optional: tab width
+  numbers         = none                 % Optional: omit line numbers
+}
+
+
+% ======================================================================
+%   Document body
+% ======================================================================
+\begin{document}
+
+% --- Portada ---
+\begin{titlepage}
+  \centering
+  \vspace*{4cm}
+  {\Huge\bfseries Bayesian Statistics: Sample Exam Questions\par}
+  \vspace{1.5cm}
+  % --- Abstract ---
+\begin{abstract}
+\noindent
+This document contains sample exam questions and answers for a Bayesian Statistics course, covering topics such as maximum likelihood estimation, confidence intervals, likelihood functions, Bayesian updating, credible intervals, and posterior distributions.
+\end{abstract}
+  \vspace{1cm}
+  {\large \today\par}
+\end{titlepage}
+
+
+
+% --- Tabla de contenidos ---
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+
+
+
+% --- Inicio del documento ---
+\section{Sample Bayesian Statistics Exam Questions}
+
+\subsection{Question 1 — MLE for $p$ in a coin flip}
+
+\textbf{Question.}  
+In 100 flips of a coin, you observe 47 heads and 53 tails. Report the MLE $\hat p$ of the probability of obtaining heads.
+
+\textbf{Answer.}  
+\[
+\hat p = 0.47.
+\]
+
+\textbf{Explanation.}  
+For a Bernoulli (or Binomial) model, the likelihood for $p$ based on $n$ trials and $x$ heads is
+\[
+L(p \mid x) \propto p^x (1-p)^{n-x}.
+\]
+Maximizing this over $p$ gives
+\[
+\hat p = \frac{x}{n} = \frac{47}{100} = 0.47.
+\]
+
+
+\subsection{Question 2 — Lower end of a 95\% CI for $p$}
+
+\textbf{Question.}  
+Using the central limit theorem as an approximation, construct a $95\%$ confidence interval for $p$, the probability of heads, and report the \emph{lower} end (rounded to two decimals).
+
+\textbf{Answer.}  
+\[
+\text{Lower end} \approx 0.37.
+\]
+
+\textbf{Explanation.}  
+Using the normal approximation for the sample proportion,
+\[
+\hat p \approx N\!\left(p, \frac{p(1-p)}{n}\right),
+\]
+we plug in $\hat p$ for $p$ in the standard error:
+\[
+\hat p = 0.47,\quad
+\widehat{\mathrm{SE}}(\hat p)
+= \sqrt{\frac{\hat p (1-\hat p)}{n}}
+= \sqrt{\frac{0.47 \cdot 0.53}{100}}
+\approx 0.0499.
+\]
+A $95\%$ CI is then
+\[
+\hat p \pm z_{0.975}\,\widehat{\mathrm{SE}}(\hat p)
+= 0.47 \pm 1.96 \times 0.0499.
+\]
+The lower bound is
+\[
+0.47 - 1.96 \cdot 0.0499 \approx 0.3722 \approx 0.37.
+\]
+
+
+\subsection{Question 3 — Upper end of a 95\% CI for $p$}
+
+\textbf{Question.}  
+Using the same $95\%$ confidence interval as in Question 2, report the \emph{upper} end (rounded to two decimals).
+
+\textbf{Answer.}  
+\[
+\text{Upper end} \approx 0.57.
+\]
+
+\textbf{Explanation.}  
+From the same calculation as above,
+\[
+\text{upper bound}
+= 0.47 + 1.96 \cdot 0.0499
+\approx 0.5678 \approx 0.57.
+\]
+Thus the approximate $95\%$ CI is
+\[
+(0.37,\ 0.57).
+\]
+
+
+\subsection{Question 4 — Definition of the likelihood}
+
+\textbf{Question.}  
+The likelihood function for parameter $\theta$ with data $y$ is based on which of the following?
+
+\begin{itemize}
+  \item $P(\theta \mid y)$
+  \item $P(y \mid \theta)$
+  \item $P(\theta)$
+  \item $P(y)$
+  \item None of the above.
+\end{itemize}
+
+\textbf{Answer.}  
+\[
+\text{The correct choice is } P(y \mid \theta).
+\]
+
+\textbf{Explanation.}  
+The \emph{likelihood function} for $\theta$ given observed data $y$ is
+\[
+L(\theta \mid y) = P(y \mid \theta)
+\]
+viewed as a function of $\theta$ (with $y$ fixed).  
+- $P(\theta \mid y)$ is the posterior (Bayesian).  
+- $P(\theta)$ is the prior.  
+- $P(y)$ is the marginal probability of the data.
+
+
+\subsection{Question 5 — MLE for $\lambda$ in an Exponential model}
+
+\textbf{Question.}  
+If $X_1,\dots,X_n \overset{\text{iid}}{\sim} \mathrm{Exponential}(\lambda)$, the MLE for $\lambda$ is
+\[
+\hat\lambda = \frac{1}{\bar x},
+\]
+where $\bar x$ is the sample mean. Suppose we observe
+\[
+X_1 = 2.0,\quad X_2 = 2.5,\quad X_3 = 4.1,\quad X_4 = 1.8,\quad X_5 = 4.0.
+\]
+Compute the MLE $\hat\lambda$, rounded to two decimal places.
+
+\textbf{Answer.}  
+\[
+\hat\lambda \approx 0.35.
+\]
+
+\textbf{Explanation.}  
+Compute the sample mean:
+\[
+\bar x
+= \frac{2.0 + 2.5 + 4.1 + 1.8 + 4.0}{5}
+= \frac{14.4}{5}
+= 2.88.
+\]
+Then the MLE is
+\[
+\hat\lambda
+= \frac{1}{\bar x}
+= \frac{1}{2.88}
+\approx 0.3472
+\approx 0.35.
+\]
+
+
+\subsection{Question 6 — MLE for $\mu$ in a Normal model}
+
+\textbf{Question.}  
+If $X_1,\dots,X_n$ are iid from a Normal distribution $N(\mu,\sigma^2)$ with unknown mean $\mu$, then the MLE for $\mu$ is the sample mean $\bar x$. Suppose we observe $n=4$ data points
+\[
+x = \{-1.2,\ 0.5,\ 0.8,\ -0.3\}.
+\]
+What is the MLE $\hat\mu$? Round your answer to two decimal places.
+
+\textbf{Answer.}  
+\[
+\hat\mu = -0.05.
+\]
+
+\textbf{Explanation.}  
+The sample mean is
+\[
+\bar x
+= \frac{-1.2 + 0.5 + 0.8 - 0.3}{4}
+= \frac{-1.2 + 0.5}{4} + \frac{0.8 - 0.3}{4}
+= \frac{-0.7}{4} + \frac{0.5}{4}
+= \frac{-0.2}{4}
+= -0.05.
+\]
+Hence the MLE is
+\[
+\hat\mu = \bar x = -0.05.
+\]
+
+\section{Exam 2}
+
+\subsection{Questions 1--5: Political Preferences}
+
+\subsubsection{Question 1}
+
+\textbf{Question.}  
+You ask $5$ yes/no questions, each ``yes'' indicating a conservative viewpoint. Let
+$Y$ be the number of ``yes'' responses and
+\[
+\theta \in \{\text{conservative},\ \text{liberal}\}.
+\]
+If $\theta=\text{conservative}$, then $P(\text{yes})=0.8$.
+If $\theta=\text{liberal}$, then $P(\text{no})=0.7$ so $P(\text{yes})=0.3$.
+Assume independence across the 5 questions.
+What is an appropriate likelihood for this scenario?
+
+\textbf{Answer.}
+\[
+f(y \mid \theta)
+=
+\binom{5}{y} 0.8^{y} 0.2^{5-y} \,\mathbf{1}\{\theta=\text{conservative}\}
++
+\binom{5}{y} 0.3^{y} 0.7^{5-y} \,\mathbf{1}\{\theta=\text{liberal}\}.
+\]
+
+\textbf{Explanation.}  
+Given $\theta=\text{conservative}$, $Y\mid\theta \sim \mathrm{Binomial}(5,0.8)$, hence
+\[
+P(Y=y \mid \theta=\text{conservative})
+= \binom{5}{y} 0.8^{y} 0.2^{5-y}.
+\]
+Given $\theta=\text{liberal}$, $Y\mid\theta \sim \mathrm{Binomial}(5,0.3)$, hence
+\[
+P(Y=y \mid \theta=\text{liberal})
+= \binom{5}{y} 0.3^{y} 0.7^{5-y}.
+\]
+We combine both in a single likelihood expression using indicator functions.
+
+
+\subsubsection{Question 2}
+
+\textbf{Question.}  
+Your colleague answers ``no'' to all 5 questions, so $Y=0$. What is the MLE for $\theta$?
+
+\textbf{Answer.}
+\[
+\hat\theta = \text{liberal}.
+\]
+
+\textbf{Explanation.}  
+Compute the likelihood under each value of $\theta$:
+\[
+P(Y=0 \mid \theta=\text{conservative}) = \binom{5}{0} 0.8^{0} 0.2^{5} = 0.2^{5} = 0.00032,
+\]
+\[
+P(Y=0 \mid \theta=\text{liberal}) = \binom{5}{0} 0.3^{0} 0.7^{5} = 0.7^{5} \approx 0.16807.
+\]
+The MLE is the value of $\theta$ that maximizes the likelihood, i.e.\ $\theta=\text{liberal}$.
+
+
+\subsubsection{Question 3}
+
+\textbf{Question.}  
+With prior
+\[
+P(\theta=\text{conservative}) = 0.5, \qquad P(\theta=\text{liberal}) = 0.5,
+\]
+Bayes' theorem gives
+\[
+f(\theta \mid y)
+= \frac{f(y \mid \theta) f(\theta)}{\sum_{\theta'} f(y\mid \theta') f(\theta')}.
+\]
+What is the corresponding expression for this problem?
+
+\textbf{Answer.}
+\[
+f(\theta \mid y)
+=
+\frac{
+\binom{5}{y} 0.8^{y} 0.2^{5-y} (0.5)\,\mathbf{1}\{\theta=\text{conservative}\}
++
+\binom{5}{y} 0.3^{y} 0.7^{5-y} (0.5)\,\mathbf{1}\{\theta=\text{liberal}\}
+}{
+\binom{5}{y} 0.8^{y} 0.2^{5-y} (0.5)
++
+\binom{5}{y} 0.3^{y} 0.7^{5-y} (0.5)
+}.
+\]
+
+\textbf{Explanation.}  
+We plug in:
+\[
+f(y\mid\theta=\text{conservative}) = \binom{5}{y} 0.8^{y}0.2^{5-y},\quad
+f(y\mid\theta=\text{liberal}) = \binom{5}{y}0.3^{y}0.7^{5-y},
+\]
+and $f(\theta)=0.5$ for each, then normalize over the two possible values of $\theta$.
+
+
+\subsubsection{Question 4}
+
+\textbf{Question.}  
+Evaluate the posterior probability $P(\theta=\text{conservative} \mid Y=0)$ and round to three decimal places.
+
+\textbf{Answer.}
+\[
+P(\theta=\text{conservative} \mid Y=0) \approx 0.002.
+\]
+
+\textbf{Explanation.}  
+Using $y=0$:
+\[
+f(y=0 \mid \theta=\text{conservative}) = 0.2^{5} = 0.00032,\quad
+f(y=0 \mid \theta=\text{liberal}) = 0.7^{5} \approx 0.16807.
+\]
+With prior $P(\theta=\text{conservative})=P(\theta=\text{liberal})=0.5$,
+\[
+\text{num}_{\text{cons}} = 0.5 \cdot 0.00032 = 0.00016,
+\quad
+\text{num}_{\text{lib}} = 0.5 \cdot 0.16807 = 0.084035.
+\]
+Normalization constant:
+\[
+Z = 0.00016 + 0.084035 = 0.084195.
+\]
+Thus
+\[
+P(\theta=\text{conservative} \mid Y=0)
+= \frac{0.00016}{0.084195}
+\approx 0.0019
+\approx 0.002.
+\]
+
+
+\subsubsection{Question 5}
+
+\textbf{Question.}  
+Evaluate the posterior probability $P(\theta=\text{liberal} \mid Y=0)$ and round to three decimal places.
+
+\textbf{Answer.}
+\[
+P(\theta=\text{liberal} \mid Y=0) \approx 0.998.
+\]
+
+\textbf{Explanation.}  
+Either compute directly:
+\[
+P(\theta=\text{liberal} \mid Y=0)
+= \frac{0.084035}{0.084195} \approx 0.9981 \approx 0.998,
+\]
+or use that the posterior probabilities must sum to 1:
+\[
+P(\theta=\text{liberal} \mid Y=0)
+= 1 - P(\theta=\text{conservative} \mid Y=0)
+\approx 1 - 0.002 = 0.998.
+\]
+
+
+\subsection{Questions 6--9: Loaded Coins}
+
+\subsubsection{Question 6}
+
+\textbf{Question.}  
+You have three possible coins:
+\[
+\theta \in \{\text{fair},\ \text{loaded favoring heads},\ \text{loaded favoring tails}\}.
+\]
+Let $X$ be the number of heads in $4$ flips.
+
+\begin{itemize}
+  \item Fair coin: $P(\text{heads})=0.5$.
+  \item Loaded favoring heads: $P(\text{heads})=0.7$.
+  \item Loaded favoring tails: $P(\text{tails})=0.7$, so $P(\text{heads})=0.3$.
+\end{itemize}
+
+What is the form of the likelihood $f(x\mid\theta)$?
+
+\textbf{Answer.}
+\[
+\begin{aligned}
+f(x\mid\theta)
+&=
+\binom{4}{x} 0.5^{x} 0.5^{4-x} \,\mathbf{1}\{\theta=\text{fair}\} \\
+&\quad
++ \binom{4}{x} 0.7^{x} 0.3^{4-x} \,\mathbf{1}\{\theta=\text{loaded heads}\} \\
+&\quad
++ \binom{4}{x} 0.3^{x} 0.7^{4-x} \,\mathbf{1}\{\theta=\text{loaded tails}\}.
+\end{aligned}
+\]
+
+\textbf{Explanation.}  
+Under each coin, $X$ is Binomial$(4,p)$ with different $p$:
+\[
+p =
+\begin{cases}
+0.5, & \theta=\text{fair},\\
+0.7, & \theta=\text{loaded heads},\\
+0.3, & \theta=\text{loaded tails}.
+\end{cases}
+\]
+We write the binomial pmf for each case and combine with indicator functions.
+
+
+\subsubsection{Question 7}
+
+\textbf{Question.}  
+Suppose you flip the coin $4$ times and observe $X=2$ heads. What is the MLE for $\theta$?
+
+\textbf{Answer.}
+\[
+\hat\theta = \text{fair}.
+\]
+
+\textbf{Explanation.}  
+Compute the likelihoods for $x=2$:
+
+\[
+\binom{4}{2} = 6.
+\]
+\[
+L_{\text{fair}} = P(X=2 \mid \theta=\text{fair})
+= 6 \cdot 0.5^{2} 0.5^{2}
+= 6 \cdot 0.5^{4}
+= 6 \cdot 0.0625
+= 0.375.
+\]
+\[
+L_{\text{heads}} = P(X=2 \mid \theta=\text{loaded heads})
+= 6 \cdot 0.7^{2} 0.3^{2}
+= 6 \cdot 0.49 \cdot 0.09
+= 6 \cdot 0.0441
+= 0.2646.
+\]
+\[
+L_{\text{tails}} = P(X=2 \mid \theta=\text{loaded tails})
+= 6 \cdot 0.3^{2} 0.7^{2}
+= 0.2646.
+\]
+Since $L_{\text{fair}} = 0.375$ is largest, the MLE is $\theta=\text{fair}$.
+
+
+\subsubsection{Question 8}
+
+\textbf{Question.}  
+With prior
+\[
+P(\theta=\text{fair})=0.4,\quad
+P(\theta=\text{loaded heads})=0.3,\quad
+P(\theta=\text{loaded tails})=0.3,
+\]
+and observing $X=2$ heads in $4$ flips, what is the posterior probability that the coin is fair?
+Round to two decimal places.
+
+\textbf{Answer.}
+\[
+P(\theta=\text{fair} \mid X=2) \approx 0.49.
+\]
+
+\textbf{Explanation.}  
+We already have
+\[
+L_{\text{fair}} = 0.375,\quad
+L_{\text{heads}} = 0.2646,\quad
+L_{\text{tails}} = 0.2646.
+\]
+Multiply by priors:
+\[
+\text{num}_{\text{fair}} = 0.4 \cdot 0.375 = 0.15,
+\]
+\[
+\text{num}_{\text{heads}} = 0.3 \cdot 0.2646 = 0.07938,
+\]
+\[
+\text{num}_{\text{tails}} = 0.3 \cdot 0.2646 = 0.07938.
+\]
+Normalization constant:
+\[
+Z = 0.15 + 0.07938 + 0.07938 = 0.30876.
+\]
+Hence
+\[
+P(\theta=\text{fair} \mid X=2)
+= \frac{0.15}{0.30876}
+\approx 0.4858
+\approx 0.49.
+\]
+
+
+\subsubsection{Question 9}
+
+\textbf{Question.}  
+With the same data $X=2$ and priors, what is the posterior probability that the coin is \emph{loaded} (favoring either heads or tails)? Round to two decimal places.
+
+\textbf{Answer.}
+\[
+P(\theta=\text{loaded} \mid X=2) \approx 0.51.
+\]
+
+\textbf{Explanation.}  
+The posterior probability that the coin is loaded (either heads or tails) is
+\[
+P(\theta=\text{loaded} \mid X=2)
+= P(\theta=\text{loaded heads} \mid X=2)
++ P(\theta=\text{loaded tails} \mid X=2).
+\]
+By complement,
+\[
+P(\theta=\text{loaded} \mid X=2)
+= 1 - P(\theta=\text{fair} \mid X=2)
+\approx 1 - 0.4858
+\approx 0.5142
+\approx 0.51.
+\]
+Equivalently, one could compute directly:
+\[
+\frac{0.07938 + 0.07938}{0.30876}
+\approx 0.5142
+\approx 0.51.
+\]
+
+
+
+
+
+
+\section{Continuous Bayes, Credible Intervals}
+
+\subsection{Question 1 — When to use the continuous Bayes formula}
+
+\textbf{Question.}  
+We use the continuous version of Bayes’ theorem if:
+
+\begin{itemize}
+  \item $\theta$ is continuous
+  \item $Y$ is continuous
+  \item $f(y\mid\theta)$ is continuous
+  \item All of the above
+  \item None of the above
+\end{itemize}
+
+\textbf{Answer.}  
+\[
+\text{We use the continuous version if $\theta$ is continuous.}
+\]
+
+\textbf{Explanation.}  
+The continuous Bayes’ theorem has the form
+\[
+f(\theta\mid y) = \frac{f(y\mid \theta) f(\theta)}{\int f(y\mid \theta) f(\theta)\, d\theta},
+\]
+which involves an \emph{integral over $\theta$}. This is the continuous case in the
+\emph{parameter} $\theta$. It does not require $Y$ to be continuous; $Y$ may be discrete
+(e.g. Bernoulli) with a continuous prior on $\theta$.
+
+\bigskip
+
+\subsection{Question 2 — Sequential update after two heads}
+
+\textbf{Question.}  
+Coin-flip example:
+
+- Likelihood for one flip: $Y\in\{0,1\}$,
+  \[
+  f(y\mid\theta) = \theta^{y} (1-\theta)^{1-y} \mathbf{1}_{\{0\le\theta\le1\}},
+  \]
+- Prior: Uniform$(0,1)$.
+- After the first flip $Y_1=1$, the posterior is
+  \[
+  f(\theta\mid Y_1=1) = 2\theta\,\mathbf{1}_{\{0\le\theta\le1\}}.
+  \]
+
+Now use this posterior as the prior for $\theta$ before the second flip.
+The second flip also results in heads, $Y_2=1$.
+Which expression represents the posterior PDF after the second head?
+
+Given options include (most relevant one):
+\[
+f(\theta\mid Y_2=1)
+= \frac{\theta \cdot 2\theta}{\displaystyle\int_0^1 \theta \cdot 2\theta\, d\theta}\,
+\mathbf{1}_{\{0\le\theta\le1\}}.
+\]
+
+\textbf{Answer.}  
+\[
+f(\theta\mid Y_1=1,Y_2=1)
+= \frac{\theta \cdot 2\theta}{\displaystyle\int_0^1 \theta \cdot 2\theta\, d\theta}\,
+\mathbf{1}_{\{0\le\theta\le1\}}.
+\]
+
+\textbf{Explanation.}  
+Sequential Bayes update:
+\[
+\text{new posterior} \propto \text{likelihood of new data} \times \text{current prior}.
+\]
+Here, for the second flip $Y_2=1$:
+\[
+f(y_2=1\mid\theta) = \theta, \quad \text{and prior density} \quad \pi(\theta) = 2\theta.
+\]
+So the unnormalized posterior is
+\[
+\theta \cdot 2\theta = 2\theta^2,\quad 0\le\theta\le1.
+\]
+Normalize:
+\[
+\int_0^1 2\theta^2\, d\theta = 2\left[\frac{\theta^3}{3}\right]_0^1 = \frac{2}{3},
+\quad\Rightarrow\quad
+f(\theta\mid Y_1=1,Y_2=1) = 3\theta^2,\ 0\le\theta\le1,
+\]
+which is exactly
+\[
+\frac{\theta\cdot 2\theta}{\int_0^1 \theta\cdot 2\theta\,d\theta}\,\mathbf{1}_{\{0\le\theta\le1\}}.
+\]
+
+\bigskip
+
+\subsection{Question 3 — Interpretation of a prior probability}
+
+\textbf{Question.}  
+We use a Uniform$(0,1)$ prior for $\theta$ and know that
+\[
+P(0.3<\theta<0.9) = 0.6.
+\]
+Which is the correct interpretation?
+
+\textbf{Answer.}  
+\[
+(0.3,0.9) \text{ is a 60\% credible interval for $\theta$ \emph{before} observing any data.}
+\]
+
+\textbf{Explanation.}  
+Since this probability comes purely from the \emph{prior} (Uniform$(0,1)$), it is a statement
+about prior uncertainty:
+\[
+P_{\text{prior}}(0.3<\theta<0.9) = 0.6.
+\]
+It is not a confidence interval (frequentist) and not based on any observed data.
+
+\bigskip
+
+\subsection{Question 4 — Interpretation of a posterior probability}
+
+\textbf{Question.}  
+After observing $Y=1$, the posterior is
+\[
+f(\theta\mid Y=1)=2\theta\,\mathbf{1}_{\{0\le\theta\le1\}}.
+\]
+We compute
+\[
+P(0.3<\theta<0.9\mid Y=1)
+= \int_{0.3}^{0.9} 2\theta\,d\theta
+= \big[\theta^2\big]_{0.3}^{0.9}
+= 0.81-0.09
+= 0.72.
+\]
+Which is the correct interpretation?
+
+\textbf{Answer.}  
+\[
+(0.3,0.9) \text{ is a 72\% credible interval for $\theta$ \emph{after} observing $Y=1$.}
+\]
+
+\textbf{Explanation.}  
+This is a \emph{posterior} probability statement:
+\[
+P(\theta\in(0.3,0.9)\mid Y=1) = 0.72.
+\]
+So $(0.3,0.9)$ is a credible interval with 72\% posterior probability. It is not a
+frequentist confidence interval and not a prior probability.
+
+\bigskip
+
+\subsection{Question 5 — Quantiles for a 90\% equal-tailed interval}
+
+\textbf{Question.}  
+Which two quantiles capture the middle $90\%$ of a distribution in an \emph{equal-tailed}
+sense?
+
+\textbf{Answer.}  
+\[
+0.05 \text{ and } 0.95.
+\]
+
+\textbf{Explanation.}  
+A $90\%$ equal-tailed interval leaves $5\%$ in each tail:
+\[
+P(\theta \le q_{0.05}) = 0.05,\quad
+P(\theta \ge q_{0.95}) = 0.05,
+\]
+so the middle $90\%$ is between the 0.05 and 0.95 quantiles.
+
+\bigskip
+
+\subsection{Question 6 — 95\% equal-tailed interval for $N(0,1)$}
+
+\textbf{Question.}  
+Suppose your posterior is
+\[
+\theta\mid y \sim N(0,1).
+\]
+Report the \emph{upper} end of a $95\%$ equal-tailed interval for $\theta$ (rounded to two decimals).
+
+\textbf{Answer.}  
+\[
+\text{Upper end} \approx 1.96.
+\]
+
+\textbf{Explanation.}  
+For a standard Normal, the $95\%$ equal-tailed interval is
+\[
+[\Phi^{-1}(0.025),\,\Phi^{-1}(0.975)] \approx [-1.96,\ 1.96].
+\]
+Thus the upper bound is $1.96$ to two decimal places.
+
+\bigskip
+
+\subsection{Question 7 — Meaning of HPD}
+
+\textbf{Question.}  
+What does “HPD interval” stand for?
+
+\textbf{Answer.}  
+\[
+\text{HPD interval} = \text{Highest Posterior Density interval}.
+\]
+
+\textbf{Explanation.}  
+An HPD interval is the set (often an interval in 1D) with posterior probability
+$1-\alpha$ such that every point inside has \emph{higher} posterior density than any
+point outside. It is the Bayesian analogue of “take the top $(1-\alpha)$ mass of the
+posterior.”
+
+\bigskip
+
+\subsection{Question 8 — 50\% credible interval}
+
+\textbf{Question.}  
+Compute the $50\%$ credible interval from a posterior distribution.
+
+\textbf{General Answer (equal-tailed).}  
+Let $F$ be the posterior CDF of $\theta$ and let $q_p = F^{-1}(p)$ be the $p$-th
+posterior quantile. A $50\%$ equal-tailed credible interval is
+\[
+[q_{0.25},\,q_{0.75}],
+\]
+i.e., the interval between the $25\%$ and $75\%$ posterior quantiles.
+
+\textbf{Example (if $\theta\mid y \sim N(0,1)$).}  
+For a standard Normal posterior,
+\[
+q_{0.25} \approx -0.67,\quad q_{0.75} \approx 0.67,
+\]
+so a $50\%$ equal-tailed credible interval is
+\[
+[-0.67,\ 0.67].
+\]
+
+
+\section{Bayesian vs frequentist}
+
+
+\subsection{Basic Interpretations}
+
+\paragraph{Frequentist confidence interval.}
+A $(1-\alpha)$ confidence interval procedure $C_f(Y)$ satisfies
+\[
+P_\theta\big(\theta \in C_f(Y)\big) \approx 1-\alpha
+\quad\text{for all relevant }\theta,
+\]
+where the probability is over repeated samples $Y$ drawn from the model with
+\emph{fixed} true parameter $\theta$.
+
+Interpretation:
+\begin{quote}
+If we repeated the data collection and interval computation many times,
+about $100(1-\alpha)\%$ of the resulting intervals would contain the
+true parameter; for the one observed interval, the true value is either
+inside or outside, but we do not assign a probability to that event.
+\end{quote}
+
+\paragraph{Bayesian credible interval.}
+Let $\pi(\theta)$ be a prior and $\pi(\theta\mid y)$ the posterior.
+A $(1-\alpha)$ credible set $C_B(y)$ satisfies
+\[
+P(\theta\in C_B(y)\mid y) = \int_{C_B(y)} \pi(\theta\mid y)\,d\theta = 1-\alpha.
+\]
+
+Interpretation:
+\begin{quote}
+Given the data $y$ and the prior model, your posterior probability that
+$\theta$ lies in $C_B(y)$ is $100(1-\alpha)\%$.
+\end{quote}
+
+\subsection{When to Prefer Frequentist Confidence Intervals}
+
+\subsubsection{(a) Regulatory or standardized settings}
+
+In drug trials, industrial quality control, or other regulated environments,
+requirements are often specified in frequentist terms:
+\[
+\text{``Use a 95\% confidence interval,'' i.e., a procedure with 95\% coverage.}
+\]
+If the goal is to guarantee long-run error control across repeated studies,
+coverage is the natural criterion, so frequentist intervals are preferred.
+
+\subsubsection{(b) Need for guaranteed coverage properties}
+
+If your main design question is
+\[
+\text{``Which rule $C_f$ has } P_\theta(\theta\in C_f(Y)) \ge 1-\alpha
+\text{ for all }\theta?'' 
+\]
+then you are explicitly optimizing a frequentist property:
+robustness over all parameter values without relying on a specific prior.
+
+\subsubsection{(c) Avoiding or lacking a prior}
+
+In contentious settings where analysts cannot agree on a prior, or where
+you wish to be ``prior-free'':
+\begin{itemize}
+  \item Frequentist intervals provide a neutral baseline.
+  \item Everyone can agree on their coverage interpretation even if they
+        disagree about prior beliefs.
+\end{itemize}
+
+\subsubsection{(d) Sample size and design calculations}
+
+Power and sample-size planning are traditionally frequentist:
+\[
+P_\theta(\text{reject }H_0) = \text{desired power},
+\]
+often connected to the width or behavior of confidence intervals. In such
+contexts, using frequentist intervals is natural and consistent with the
+rest of the design.
+
+\subsection{When to Prefer Bayesian Credible Intervals}
+
+\subsubsection{(a) Direct probability statements about parameters}
+
+If you want to answer questions like
+\[
+P(\theta > 0 \mid y) \quad\text{or}\quad P(a < \theta < b \mid y) = 0.95,
+\]
+then Bayesian credible intervals are the appropriate tool. They directly
+encode your uncertainty about $\theta$ given the data and prior.
+
+\subsubsection{(b) Presence of genuine prior information}
+
+When substantial prior information exists (historical data, physical
+constraints, expert knowledge), Bayesian methods allow you to incorporate
+this via $\pi(\theta)$ and obtain posterior intervals that combine prior
+and data:
+\[
+\pi(\theta\mid y) \propto f(y\mid\theta)\,\pi(\theta).
+\]
+In small samples, this can stabilize inference and produce more reasonable
+intervals than purely likelihood-based ones.
+
+\subsubsection{(c) Complex or hierarchical models}
+
+For multilevel/hierarchical models, random effects, or high-dimensional
+latent structures, frequentist confidence intervals can be hard to derive
+or approximate. Bayesian posterior computation (e.g.\ MCMC) naturally
+yields marginal posterior distributions for many parameters, from which
+credible intervals are straightforward to obtain.
+
+\subsubsection{(d) Decision-making with losses or utilities}
+
+In decision-theoretic problems with a loss function $L(\theta,a)$, actions
+are chosen based on posterior expectations:
+\[
+\mathbb{E}[L(\theta,a)\mid y] = \int L(\theta,a)\,\pi(\theta\mid y)\,d\theta.
+\]
+Here, probabilities like $P(\theta\in C_B(y)\mid y)$ play a direct role in
+choosing optimal actions, so Bayesian credible intervals align with the
+decision framework.
+
+\subsection{When They Coincide (Approximately)}
+
+In many regular problems with large sample size:
+\begin{itemize}
+  \item Likelihood is approximately Normal in $\theta$,
+  \item Priors are weak or diffuse,
+\end{itemize}
+then
+\[
+\pi(\theta\mid y) \approx N\big(\hat\theta,\ \widehat{\mathrm{Var}}(\hat\theta)\big),
+\]
+and the $(1-\alpha)$ Bayesian credible interval often numerically matches
+the $(1-\alpha)$ frequentist confidence interval. In such cases, the
+difference is mostly interpretational rather than numerical.
+
+\subsection{Compact Summary}
+
+Let
+\begin{itemize}
+  \item $C_f(Y)$ be a frequentist confidence interval rule,
+  \item $C_B(Y)$ be a Bayesian credible set rule.
+\end{itemize}
+
+Then:
+\[
+\boxed{
+\begin{aligned}
+&\text{Prefer frequentist CIs } C_f(Y)
+&&\text{when you prioritize long-run coverage}
+&&\big(P_\theta(\theta\in C_f(Y)) \approx 1-\alpha\big). \\[4pt]
+&\text{Prefer Bayesian credible sets } C_B(Y)
+&&\text{when you prioritize posterior belief}
+&&\big(P(\theta\in C_B(Y)\mid Y=y) = 1-\alpha\big).
+\end{aligned}
+}
+\]
+
+
+\section{Honor Quizz}
+
+\subsection{Question 1}
+
+\textbf{Question.}  
+Although the likelihood function is not always a product of
+\[
+L(\theta \mid y_1,\dots,y_n)
+= \prod_{i=1}^n f(y_i \mid \theta),
+\]
+this product form is convenient mathematically. What assumption about the observations
+$y_1,\dots,y_n$ allows us to multiply their individual likelihood components?
+
+\textbf{Answer.}  
+\[
+\text{The observations are independent (given $\theta$).}
+\]
+
+\textbf{Explanation.}  
+By definition, if $Y_1,\dots,Y_n$ are independent given $\theta$, then
+\[
+P(Y_1=y_1,\dots,Y_n=y_n \mid \theta)
+= \prod_{i=1}^n P(Y_i=y_i \mid \theta)
+= \prod_{i=1}^n f(y_i \mid \theta).
+\]
+So independence (conditional on $\theta$) justifies writing the joint likelihood as a product
+of marginal likelihoods.
+
+
+\subsection{Question 2}
+
+\textbf{Question.}  
+One property of maximum likelihood estimators (MLEs) is transformation invariance:
+if $\hat\theta$ is the MLE for $\theta$, then the MLE for $g(\theta)$ is $g(\hat\theta)$
+for any function $g(\cdot)$.
+
+Suppose you conduct $n=25$ Bernoulli trials and observe $x=10$ successes.
+What is the MLE for the \emph{odds} of success
+\[
+g(\theta) = \frac{\theta}{1-\theta} \, ?
+\]
+
+\textbf{Answer.}  
+\[
+\widehat{\text{odds}} = \frac{2}{3} \approx 0.67.
+\]
+
+\textbf{Explanation.}  
+The Bernoulli success probability $\theta$ has likelihood
+\[
+L(\theta \mid x) \propto \theta^{x}(1-\theta)^{n-x},
+\]
+and the MLE is the sample proportion:
+\[
+\hat\theta = \frac{x}{n} = \frac{10}{25} = 0.4.
+\]
+By transformation invariance of MLEs, the MLE of the odds $g(\theta)=\theta/(1-\theta)$ is
+\[
+\widehat{g(\theta)} = g(\hat\theta)
+= \frac{\hat\theta}{1-\hat\theta}
+= \frac{0.4}{1-0.4}
+= \frac{0.4}{0.6}
+= \frac{2}{3} \approx 0.67.
+\]
+
+
+\subsection{Question 3}
+
+\textbf{Question.}  
+A coin may be fair (probability of heads $0.5$) or loaded (probability of heads $0.7$).
+Let $L$ denote ``loaded'' and $F$ denote ``fair''.
+
+Your prior probabilities are
+\[
+P(L) = 0.6, \qquad P(F)=0.4.
+\]
+Another sibling proposes a bet:
+
+\begin{itemize}
+  \item If the coin is loaded ($L$), she pays you \$1.
+  \item If the coin is fair ($F$), you pay her \$z.
+\end{itemize}
+
+Find $z$ that makes the game fair in terms of your prior (i.e., prior expected payoff $=0$).
+
+\textbf{Answer.}  
+\[
+z = 1.5.
+\]
+
+\textbf{Explanation.}  
+Let $X$ be your payoff. Then
+\[
+X =
+\begin{cases}
++1, & \text{if } L,\\[4pt]
+-z, & \text{if } F.
+\end{cases}
+\]
+The prior expected payoff is
+\[
+\mathbb{E}[X]
+= P(L)\cdot 1 + P(F)\cdot (-z)
+= 0.6 - 0.4 z.
+\]
+A fair game (in your prior sense) requires $\mathbb{E}[X]=0$:
+\[
+0.6 - 0.4z = 0
+\quad\Longrightarrow\quad
+0.4 z = 0.6
+\quad\Longrightarrow\quad
+z = \frac{0.6}{0.4} = 1.5.
+\]
+
+
+\subsection{Question 4}
+
+\textbf{Question.}  
+Before taking the bet, you agree to flip the coin once. It lands heads ($H$).
+
+Your sister now argues this is evidence for the loaded coin and demands to increase
+$z$ to $2$:
+
+\begin{itemize}
+  \item If $L$ (loaded): you gain \$1.
+  \item If $F$ (fair): you lose \$2.
+\end{itemize}
+
+Using your \emph{posterior} probability after observing one head, should you accept
+the new bet at $z=2$?
+
+\textbf{Answer (correct option).}  
+\[
+\text{Yes, your posterior expected payoff is now greater than \$0.}
+\]
+
+\textbf{Explanation.}  
+First update your belief using Bayes' rule after observing one head:
+
+\[
+P(H \mid L) = 0.7, \qquad P(H \mid F) = 0.5,
+\]
+\[
+P(L) = 0.6, \qquad P(F) = 0.4.
+\]
+
+Joint (unnormalized) probabilities:
+\[
+P(L,H) = P(H \mid L)P(L) = 0.7 \cdot 0.6 = 0.42,
+\]
+\[
+P(F,H) = P(H \mid F)P(F) = 0.5 \cdot 0.4 = 0.20.
+\]
+
+Marginal probability of heads:
+\[
+P(H) = P(L,H) + P(F,H) = 0.42 + 0.20 = 0.62.
+\]
+
+Posterior probabilities:
+\[
+P(L \mid H) = \frac{P(L,H)}{P(H)} = \frac{0.42}{0.62} \approx 0.6774,
+\]
+\[
+P(F \mid H) = \frac{P(F,H)}{P(H)} = \frac{0.20}{0.62} \approx 0.3226.
+\]
+
+With $z=2$, your payoff $X$ is
+\[
+X =
+\begin{cases}
++1, & \text{if } L,\\[4pt]
+-2, & \text{if } F.
+\end{cases}
+\]
+
+Posterior expected payoff:
+\[
+\mathbb{E}[X \mid H]
+= P(L \mid H)\cdot 1 + P(F \mid H)\cdot (-2)
+\approx 0.6774 - 2(0.3226)
+\approx 0.6774 - 0.6452
+\approx 0.0322 > 0.
+\]
+
+Since your posterior expected payoff is positive, you \emph{should} accept the new bet
+at $z=2$ according to your Bayesian posterior.
+
+\end{document}
