@@ -1,0 +1,15 @@
+Lesson 4.1 Confidence intervals
+
+Lesson 4.2 Likelihood function and maximum likelihood
+
+Lesson 4.3 Computing the MLE
+
+Lesson 5.1 Inference example: frequentist
+
+Lesson 5.2 Inference example: Bayesian
+
+Lesson 5.3 Continuous version of Bayes' theorem
+
+Lesson 5.4 Posterior intervals
+
+Confidence intervals and credible intervals
